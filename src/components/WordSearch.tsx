@@ -16,7 +16,7 @@ interface WordSearchProps {
 }
 
 const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
-    const GRID_SIZE = difficulty === 'DIFICIL' ? 9 : 8;
+    const GRID_SIZE = 8;
 
     // Filter categories by selected difficulty
     const availableCategories = CATEGORIES.filter(c => c.difficulty === difficulty);
@@ -42,7 +42,7 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
         // Determin words per game based on difficulty
         const wordsPerGame = difficulty === 'FACIL' ? 4 : difficulty === 'MEDIO' ? 5 : 6;
 
-        // Pick words that fit in current grid size
+        // Pick words that fit in current grid size (max length 8)
         const validWords = currentCategory.words.filter(w => w.length <= GRID_SIZE);
         const wordPool = [...validWords].sort(() => Math.random() - 0.5);
         const selectedWords = wordPool.slice(0, wordsPerGame);
@@ -189,22 +189,23 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
     const isCellFound = (r: number, c: number) => foundCells.has(`${r}-${c}`);
 
     return (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-6 w-full h-full">
             <div className="flex justify-between items-center bg-slate-100 -mx-8 -mt-8 p-6 border-b-2 border-slate-200 mb-2">
                 <button onClick={onBack} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <ChevronLeft className="w-6 h-6 text-primary" />
+                    <ChevronLeft className="w-8 h-8 text-primary" />
                 </button>
                 <div className="text-center">
                     <h2 className="text-xl font-black text-primary leading-tight uppercase tracking-tight">{currentCategory.name}</h2>
                     <span className="text-xs uppercase tracking-[0.2em] text-slate-600 font-extrabold">{difficulty}</span>
                 </div>
                 <button onClick={initGame} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <RotateCcw className="w-6 h-6 text-primary" />
+                    <RotateCcw className="w-8 h-8 text-primary" />
                 </button>
             </div>
 
+            {/* Maximized Grid */}
             <div
-                className="grid gap-2 bg-slate-200 p-3 rounded-[32px] shadow-inner select-none touch-none border-4 border-white justify-center"
+                className="grid gap-1.5 bg-slate-200 p-2 rounded-[32px] shadow-inner select-none touch-none border-y-4 border-white -mx-8 w-[calc(100%+64px)] justify-center"
                 style={{
                     gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`
                 }}
@@ -221,8 +222,8 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                         onMouseDown={() => handleTouchStart(cell)}
                         onTouchStart={() => handleTouchStart(cell)}
                         className={`
-              w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center 
-              text-2xl font-black rounded-xl transition-all
+              w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center 
+              text-3xl font-black rounded-xl transition-all
               ${isSelected(r, c)
                                 ? 'bg-primary text-white scale-110 z-10 shadow-lg'
                                 : isCellFound(r, c)
@@ -237,13 +238,14 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                 )))}
             </div>
 
-            <div className="flex flex-wrap gap-2 justify-center py-2">
+            {/* Simplified Word List */}
+            <div className="flex flex-wrap gap-2 justify-center py-2 px-2">
                 {activeWords.map((word: string) => (
                     <span
                         key={word}
                         className={`px-4 py-2 rounded-2xl text-xs font-black border-2 transition-all ${foundWords.includes(word)
-                            ? 'bg-green-100 text-green-900 border-green-500/30 line-through scale-95 opacity-50 font-bold'
-                            : 'bg-white text-slate-900 border-slate-200 shadow-md scale-100'
+                            ? 'bg-green-100 text-green-900 border-green-500/30 line-through opacity-40'
+                            : 'bg-white text-slate-900 border-slate-200 shadow-md ring-2 ring-slate-50'
                             }`}
                     >
                         {word}
