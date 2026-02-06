@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RotateCcw, ChevronLeft, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
+import GameHeader from './GameHeader';
 import { MEMORY_THEMES, MemoryCard, generateCards, MemoryTheme } from '../lib/memory';
 import { saveProgress } from '../lib/storage';
 import { getMemoryGameConfig } from '../lib/gameConfig';
@@ -79,19 +80,11 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ difficulty, onBack }) => {
 
     return (
         <div className="flex flex-col gap-6 w-full h-full relative">
-            {/* Header */}
-            <div className="flex justify-between items-center bg-slate-100 -mx-8 -mt-8 p-6 border-b-2 border-slate-200 mb-2">
-                <button onClick={onBack} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <ChevronLeft className="w-8 h-8 text-primary" />
-                </button>
-                <div className="text-center">
-                    <h2 className="text-xl font-black text-primary leading-tight uppercase tracking-tight">Memória</h2>
-                    <span className="text-xs uppercase tracking-[0.2em] text-slate-600 font-extrabold">{currentTheme.name}</span>
-                </div>
-                <button onClick={initGame} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <RotateCcw className="w-8 h-8 text-primary" />
-                </button>
-            </div>
+            <GameHeader
+                title="Memória"
+                subtitle={currentTheme.name}
+                onBack={onBack}
+            />
 
             {/* Grid Area - Taking as much space as possible */}
             <div className="flex-1 flex items-center justify-center p-2 bg-slate-50 rounded-[40px] shadow-inner border-2 border-slate-200/50">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RotateCcw, ChevronLeft, Star, Lightbulb, Flower2 } from 'lucide-react';
+import { RotateCcw, Star, Lightbulb, Flower2 } from 'lucide-react';
+import GameHeader from './GameHeader';
 import { HANGMAN_CATEGORIES, getRandomCategory, getRandomWord, HangmanCategory } from '../lib/hangman';
 import { saveProgress } from '../lib/storage';
 import { getHangmanConfig } from '../lib/gameConfig';
@@ -106,25 +107,17 @@ const Hangman: React.FC<HangmanProps> = ({ difficulty, onBack }) => {
 
     return (
         <div className="flex flex-col gap-4 w-full h-full relative">
-            {/* Header */}
-            <div className="flex justify-between items-center bg-slate-100 -mx-8 -mt-8 p-6 border-b-2 border-slate-200 mb-2">
-                <button onClick={onBack} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <ChevronLeft className="w-8 h-8 text-primary" />
-                </button>
-                <div className="text-center">
-                    <h2 className="text-xl font-black text-primary leading-tight uppercase tracking-tight">Forca das Flores</h2>
-                    <span className="text-xs uppercase tracking-[0.2em] text-slate-600 font-extrabold">{category.name}</span>
-                </div>
-                <button onClick={initGame} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <RotateCcw className="w-8 h-8 text-primary" />
-                </button>
-            </div>
+            <GameHeader
+                title="Forca das Flores"
+                subtitle={category.name}
+                onBack={onBack}
+            />
 
-            {/* Tree Area - Premium Organic Visual */}
-            <div className="flex-1 flex flex-col items-center justify-between p-6 bg-gradient-to-b from-white to-blue-50/10 rounded-[48px] shadow-inner border-2 border-slate-100 relative overflow-hidden">
+            {/* Tree Area - Compact Visual */}
+            <div className="flex-1 flex flex-col items-center justify-between p-4 bg-gradient-to-b from-white to-blue-50/10 rounded-[40px] shadow-inner border-2 border-slate-100 relative overflow-hidden min-h-0">
                 {/* Visual Tree Metafor */}
-                <div className="relative w-full h-80 flex items-center justify-center pt-8">
-                    <svg viewBox="0 0 200 200" className="w-72 h-72 drop-shadow-xl">
+                <div className="relative w-full h-[180px] flex items-center justify-center pt-2">
+                    <svg viewBox="0 0 200 200" className="w-56 h-56 drop-shadow-xl">
                         {/* Ground shadow */}
                         <ellipse cx="100" cy="180" rx="70" ry="12" fill="#e2e8f0" opacity="0.4" />
                         <path d="M30 180 Q100 165 170 180" stroke="#cbd5e1" strokeWidth="4" fill="none" strokeLinecap="round" />
@@ -202,9 +195,9 @@ const Hangman: React.FC<HangmanProps> = ({ difficulty, onBack }) => {
                     </div>
                 </div>
 
-                {/* Word Display Area */}
-                <div className="w-full flex flex-col items-center gap-6 pb-2">
-                    <div className="flex flex-wrap justify-center gap-3">
+                {/* Word Display Area - Larger Letters */}
+                <div className="w-full flex flex-col items-center gap-4 pb-1">
+                    <div className="flex flex-wrap justify-center gap-2">
                         {wordData.term.split("").map((letter, i) => {
                             const isRevealed = guessedLetters.includes(letter) || letter === " " || letter === "-";
                             return (
@@ -216,7 +209,7 @@ const Hangman: React.FC<HangmanProps> = ({ difficulty, onBack }) => {
                                         color: isRevealed ? "#1e293b" : "#94a3b8"
                                     }}
                                     className={`
-                                        w-10 h-14 border-b-4 flex items-center justify-center text-3xl font-black
+                                        w-12 h-16 border-b-[6px] flex items-center justify-center text-5xl font-black
                                         ${letter === " " ? "border-transparent w-4" :
                                             isRevealed ? "border-primary" : "border-slate-200"}
                                     `}
@@ -227,20 +220,20 @@ const Hangman: React.FC<HangmanProps> = ({ difficulty, onBack }) => {
                         })}
                     </div>
 
-                    {/* Hint Button / Message */}
-                    <div className="h-20 flex items-center justify-center w-full">
+                    {/* Hint Button / Message - Slimmer */}
+                    <div className="h-12 flex items-center justify-center w-full">
                         <AnimatePresence mode="wait">
                             {(showHint || isLost) ? (
                                 <motion.div
                                     key="hint-box"
                                     initial={{ opacity: 0, y: 10, scale: 0.9 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    className="bg-amber-50/80 backdrop-blur-sm text-amber-900 px-6 py-3 rounded-2xl border-2 border-amber-200 shadow-sm flex items-center gap-3 max-w-sm"
+                                    className="bg-amber-50/80 backdrop-blur-sm text-amber-900 px-4 py-2 rounded-xl border-2 border-amber-200 shadow-sm flex items-center gap-2 max-w-sm"
                                 >
-                                    <Lightbulb className="w-6 h-6 text-amber-500 shrink-0" />
+                                    <Lightbulb className="w-5 h-5 text-amber-500 shrink-0" />
                                     <div className="text-left leading-tight">
-                                        <span className="text-[10px] font-black uppercase tracking-widest opacity-60 block">Dica</span>
-                                        <span className="text-sm font-bold">{wordData.hint}</span>
+                                        <span className="text-[8px] font-black uppercase tracking-widest opacity-60 block">Dica</span>
+                                        <span className="text-xs font-bold">{wordData.hint}</span>
                                     </div>
                                 </motion.div>
                             ) : !isWon && config.allowHints && (
@@ -250,9 +243,9 @@ const Hangman: React.FC<HangmanProps> = ({ difficulty, onBack }) => {
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
                                     onClick={() => setShowHint(true)}
-                                    className="flex items-center gap-3 px-6 py-2.5 bg-white text-amber-700 rounded-full font-black text-sm border-2 border-amber-100 shadow-sm active:scale-95 transition-all hover:bg-amber-50"
+                                    className="flex items-center gap-2 px-5 py-2 bg-white text-amber-700 rounded-full font-black text-xs border-2 border-amber-100 shadow-sm active:scale-95 transition-all hover:bg-amber-50"
                                 >
-                                    <Lightbulb className="w-5 h-5" />
+                                    <Lightbulb className="w-4 h-4" />
                                     PRECISA DE UMA DICA?
                                 </motion.button>
                             )}
@@ -261,18 +254,18 @@ const Hangman: React.FC<HangmanProps> = ({ difficulty, onBack }) => {
                 </div>
             </div>
 
-            {/* Premium Keyboard - Optimized for Senior Touch UX */}
-            <div className="flex flex-col gap-2 p-3 bg-slate-100/80 backdrop-blur-sm rounded-[32px] shadow-lg border border-white">
+            {/* Premium Keyboard - Optimized for Senior Touch UX - More Compact */}
+            <div className="flex flex-col gap-1.5 p-2 bg-slate-100/80 backdrop-blur-sm rounded-[28px] shadow-lg border border-white">
                 {/* Row 1 */}
-                <div className="flex justify-center gap-1.5">
+                <div className="flex justify-center gap-1">
                     {ALPHABET.slice(0, 9).map(renderKey)}
                 </div>
                 {/* Row 2 */}
-                <div className="flex justify-center gap-1.5 ml-4">
+                <div className="flex justify-center gap-1 ml-4">
                     {ALPHABET.slice(9, 18).map(renderKey)}
                 </div>
                 {/* Row 3 */}
-                <div className="flex justify-center gap-1.5 pl-4">
+                <div className="flex justify-center gap-1 pl-4">
                     {ALPHABET.slice(18).map(renderKey)}
                 </div>
             </div>

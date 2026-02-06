@@ -7,21 +7,23 @@ Uma suíte de jogos nostálgicos e acessíveis, criada com todo o carinho para m
 ## 🌟 Funcionalidades
 
 - **Hub de Jogos**: Um menu central para escolher entre diferentes jogos e desafios.
-- **Caça-Palavras Dinâmico**:
-  - Mais de **50.000 combinações únicas** geradas a partir de um grande banco de palavras.
-  - Três níveis de dificuldade: **Iniciante**, **Intermediário** e **Especialista**.
-- **Jogo da Memória Temático**:
-  - **Temas Nostálgicos Aleatórios**: Jardim da Vovó, Hora do Café, Olhando o Céu e Tempo de Lazer.
-  - **Complexidade Dinâmica**: Quantidade de cartas e velocidade de virada ajustadas conforme a dificuldade.
-- **Sistema de Pontuação Global**: Ganhe pontos em cada vitória (1, 5 ou 10 pontos dependendo da dificuldade).
+- **Forca das Flores (Flower's Luck)**:
+  - Uma versão acolhedora e positiva do clássico jogo da forca.
+  - Árvore da Sorte orgânica em SVG com pétalas de flores que caem graciosamente.
+  - Categorias nostálgicas: Receitas de Família, Coisas de Casa, Flores e Jardim.
+- **Progressão e Recompensas**:
+  - Ganhe pontos para desbloquear **15 insígnias afetivas** (de "Doutora em Carinho" a "Amor Infinito").
+  - Sistema de celebração persistente com chuva de confetes.
 - **UX para Idosos (Senior-Friendly)**:
-  - Alto contraste (proporção 7:1) para melhor visibilidade.
-  - Áreas de toque grandes (60px) e ícones maximizados para facilitar a interação.
-  - Suporte PWA: Otimizado para jogar offline com ícones premium de alta definição.
+  - **Grade de Ícones Estilo Celular**: Botões grandes e coloridos para fácil reconhecimento.
+  - **Layout Ultra-Compacto**: Design otimizado para caber tudo na tela sem rolagem excessiva.
+  - Alto contraste e áreas de toque generosas.
+  - Suporte PWA: Otimizado para jogar offline com ícones premium.
 
 ## 🕹️ Jogos Disponíveis
 - **🔍 Caça-Palavras**: Mais de 50.000 combinações únicas em três níveis.
-- **🧠 Jogo da Memória**: Combine ícones nostálgicos em um grid otimizado para idosos.
+- **🧠 Jogo da Memória**: Combine ícones nostálgicos em um grid otimizado.
+- **🌳 Forca das Flores**: Adivinhe palavras para manter a árvore florida.
 
 ## 🛠️ Tecnologias
 

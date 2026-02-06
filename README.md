@@ -7,21 +7,23 @@ A nostalgic and accessible game suite designed with love for my mother (born in 
 ## 🌟 Features
 
 - **Game Suite Hub**: A central menu to select between different games and challenges.
-- **Dynamic Word Search**:
-  - Over **50,000 unique word combinations** generated from a vast pool.
-  - Three difficulty levels: **Beginner**, **Intermediate**, and **Expert**.
-- **Themed Memory Game**:
-  - **Random Nostalgic Themes**: Grandma's Garden, Coffee Time, Sky Watching, and Leisure Time.
-  - **Dynamic Complexity**: Cards count and flip speed adjust based on difficulty.
-- **Global Scoring System**: Earn points for every victory (1, 5, or 10 points based on difficulty).
-- **Senior-Friendly UX**:
-  - High contrast (7:1 ratio) for better visibility.
-  - Large hit targets (60px) and maximized icons for easy interaction.
-  - PWA Support: Optimized for offline play with high-definition premium icons.
+- **Forca das Flores (Flower's Luck)**:
+  - Uma versão acolhedora e positiva do clássico jogo da forca.
+  - Árvore da Sorte orgânica em SVG com pétalas de flores que caem graciosamente.
+  - Categorias nostálgicas: Receitas de Família, Coisas de Casa, Flores e Jardim.
+- **Progressão e Recompensas**:
+  - Ganhe pontos para desbloquear **15 insígnias afetivas** (de "Doutora em Carinho" a "Amor Infinito").
+  - Sistema de celebração persistente com chuva de confetes.
+- **UX para Idosos (Senior-Friendly)**:
+  - **Grade de Ícones Estilo Celular**: Botões grandes e coloridos para fácil reconhecimento.
+  - **Layout Ultra-Compacto**: Design otimizado para caber tudo na tela sem rolagem excessiva.
+  - Alto contraste e áreas de toque generosas.
+  - Suporte PWA: Otimizado para jogar offline com ícones premium.
 
-## 🕹️ Games Included
-- **🔍 Word Search**: Over 50,000 unique combinations across three difficulty levels.
-- **🧠 Memory Game**: Match nostalgic icons in a senior-optimized grid.
+## 🕹️ Jogos Disponíveis
+- **🔍 Caça-Palavras**: Mais de 50.000 combinações únicas em três níveis.
+- **🧠 Jogo da Memória**: Combine ícones nostálgicos em um grid otimizado.
+- **🌳 Forca das Flores**: Adivinhe palavras para manter a árvore florida.
 
 ## 🛠️ Tech Stack
 

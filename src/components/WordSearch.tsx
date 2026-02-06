@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { CATEGORIES, VICTORY_PHRASES, Difficulty, WordCategory } from '../lib/phrases';
 import { saveProgress } from '../lib/storage';
 import { getWordSearchConfig } from '../lib/gameConfig';
-import { RotateCcw, ChevronLeft } from 'lucide-react';
+import GameHeader from './GameHeader';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Cell {
@@ -205,18 +205,11 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
 
     return (
         <div className="flex flex-col gap-6 w-full h-full">
-            <div className="flex justify-between items-center bg-slate-100 -mx-8 -mt-8 p-6 border-b-2 border-slate-200 mb-2">
-                <button onClick={onBack} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <ChevronLeft className="w-8 h-8 text-primary" />
-                </button>
-                <div className="text-center">
-                    <h2 className="text-xl font-black text-primary leading-tight uppercase tracking-tight">{currentCategory.name}</h2>
-                    <span className="text-xs uppercase tracking-[0.2em] text-slate-600 font-extrabold">{difficulty}</span>
-                </div>
-                <button onClick={initGame} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <RotateCcw className="w-8 h-8 text-primary" />
-                </button>
-            </div>
+            <GameHeader
+                title={currentCategory.name}
+                subtitle={difficulty}
+                onBack={onBack}
+            />
 
             {/* Maximized Grid */}
             <div

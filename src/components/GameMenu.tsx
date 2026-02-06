@@ -109,7 +109,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                                 <div className="flex items-center gap-2 mb-0.5">
                                     <span className="text-[9px] uppercase tracking-[0.15em] font-black text-primary/60 block">Nível {status.currentBadge.level}</span>
                                 </div>
-                                <h2 className="text-lg font-black text-slate-900 leading-tight truncate">
+                                <h2 className="text-lg font-black text-slate-900 leading-tight h-10 flex items-center">
                                     {status.currentBadge.title}
                                 </h2>
                             </div>
