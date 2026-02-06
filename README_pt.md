@@ -81,4 +81,4 @@ Este projeto está configurado para o **GitHub Pages**. Para publicar:
 
 ## ❤️ Dedicação
 
-Este projeto foi criado para levar alegria e exercício mental para minha mãe. Cada palavra e cor foi escolhida pensando no conforto e na felicidade dela.
+Este projeto foi criado para levar alegria e exercício mental para minha mãe. Cada palavra e cor foi escolhida pensando no conforto e na felicidade dela..
