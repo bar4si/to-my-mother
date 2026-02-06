@@ -4,6 +4,9 @@
 			"path": "."
 		},
 		{
+			"path": "public"
+		},
+		{
 			"path": "dist"
 		},
 		{
@@ -18,6 +21,7 @@
 			"node_modules": true,
 			"dist": true,
 			"src": true,
+			"public": true,
 			"docs": true
 		},
 		"workbench.editorAssociations": {

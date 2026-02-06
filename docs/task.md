@@ -1,26 +1,33 @@
-# Task Checklist: Projeto Caça-Palavras 1941 (UX Senior + Evolução + Afeto)
+# Task Checklist
 
-## 1. Planejamento e Design UX [x]
-- [x] Definir temas de palavras (Anos 40-60)
-- [x] Definir Princípios UX Senior (Hit targets 60px, Contraste 7:1)
-- [x] Planejar Sistema de Persistência e Afeto (LocalStorage + Mensagens)
-
-## 2. Configuração do Projeto [/]
-- [ ] Inicializar Vite + React + TypeScript
-- [ ] Configurar `vite-plugin-pwa` para modo offline
-- [ ] Configurar Tailwind + Shadcn/UI (Design System)
-
-## 3. Desenvolvimento do Motor e Persistência [ ]
-- [ ] Algoritmo de Grid 10x10 com Hit Targets de 60px
-- [ ] Lógica de seleção Dual (Swipe + Toque Sequencial)
-- [ ] Implementar `storage.ts` para salvar progresso e vitórias
-
-## 4. Experiência de Evolução e Afeto [ ]
-- [ ] Criar Tela de "Galeria de Vitórias" (Histórico)
-- [ ] Implementar `phrases.ts` com mensagens carinhosas e encorajadoras
-- [ ] Implementar feedbacks visuais e táteis (Framer Motion + Vibration)
-- [ ] Adicionar sons sutis e animações de sucesso
-
-## 5. Finalização e Entrega [ ]
-- [ ] Adicionar palavras personalizadas da família
-- [ ] Validar instalação PWA e modo offline total no mobile
+- [x] Analyze existing project structure and deployment configuration
+- [x] Explain how to publish to GitHub Pages using the existing GitHub Action
+- [x] Provide steps for manual configuration in the GitHub UI
+- [x] Verify if any additional configuration (like `base` path) is required
+- [x] Update README.md and README_pt.md to reflect project changes
+    - [x] Create implementation plan
+    - [x] Update README.md (English)
+    - [x] Update README_pt.md (Portuguese)
+- [x] Improve visual contrast on the home screen
+    - [x] Analyze current color palette and contrast ratios
+    - [x] Create implementation plan
+    - [x] Update theme colors for higher contrast
+    - [x] Enhance text and component accessibility
+- [x] Remove "Coming Soon" placeholders
+    - [x] Remove Memory Game from GameMenu.tsx
+    - [x] Update READMEs
+- [x] Apply high contrast to WordSearch component
+    - [x] Analyze WordSearch.tsx styles
+    - [x] Update header and UI elements contrast
+    - [x] Enhance grid and word list visibility
+- [x] Maximize readability on 8x8 grid
+    - [x] Lock GRID_SIZE to 8
+    - [x] Expand grid to container edges (-mx-8)
+    - [x] Increase cell and font size (text-3xl)
+    - [x] Simplify word list layout
+- [/] Generate and configure PWA assets
+    - [x] Create `public` directory
+    - [/] Generate premium app icon
+    - [x] Create basic `mask-icon.svg`
+    - [ ] Create 192x192 and 512x512 versions
+    - [ ] Create favicon.ico and apple-touch-icon.png

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import WordSearch from './components/WordSearch'
+import MemoryGame from './components/MemoryGame'
 import GameMenu from './components/GameMenu'
 import { getProgress, saveDifficulty, GameProgress } from './lib/storage'
 import { Difficulty } from './lib/phrases'
@@ -36,6 +37,14 @@ function App() {
             <main className="w-full max-w-md bg-white rounded-[48px] shadow-2xl overflow-hidden p-8 border border-accent">
                 {currentGame === 'wordsearch' && progress.preferredDifficulty ? (
                     <WordSearch
+                        difficulty={progress.preferredDifficulty}
+                        onBack={() => {
+                            setCurrentGame(null);
+                            refreshProgress();
+                        }}
+                    />
+                ) : currentGame === 'memory' && progress.preferredDifficulty ? (
+                    <MemoryGame
                         difficulty={progress.preferredDifficulty}
                         onBack={() => {
                             setCurrentGame(null);

@@ -1,64 +1,47 @@
-# Plano: Caça-Palavras Nostalgia 1941 (Mobile First + UX Senior)
+# Improve Visual Contrast and Accessibility
 
-Este projeto visa criar um jogo de caça-palavras digital otimizado para **dispositivos móveis**, personalizado para uma pessoa nascida em 1941.
+Enhance the visual accessibility of the application, especially for seniors, by increasing color contrast and refining UI elements on the home screen.
 
-## Índice
-1. [Arquitetura Sugerida](#1-arquitetura-sugerida)
-2. [Diretrizes de Design UX Senior](#2-diretrizes-de-design-ux-senior)
-3. [User Review Required](#3-user-review-required)
-4. [Mudanças Propostas](#4-mudanças-propostas)
-5. [Plano de Verificação](#5-plano-de-verificação)
+## Proposed Changes
 
----
+### Styling & Theme
 
-## 1. Arquitetura Sugerida
-Recomendamos o uso do **Vite** com **React** e **TypeScript**, complementado por:
+#### [MODIFY] [tailwind.config.js](file:///d:/projects/anti/to-my-mother/tailwind.config.js)
+- Increase background contrast: change `#fdfbf7` (soft cream) to a cleaner white or higher-contrast light shade if needed.
+- Darken primary and foreground colors for maximum legibility.
+- Update `accent` colors for better distinction from the background.
 
-> [!TIP]
-> **Por que TypeScript?**
-> - **Robustez**: Evita erros comuns de digitação e lógica, garantindo que o jogo funcione sempre perfeitamente para sua mãe.
-> - **Manutenibilidade**: Facilita a adição de novas palavras ou funcionalidades no futuro.
+#### [MODIFY] [index.css](file:///d:/projects/anti/to-my-mother/src/index.css)
+- Add accessibility-focused utility classes if necessary (e.g., higher font weights, clearer focus states).
 
-> [!TIP]
-> **Framework de Componentes: Shadcn/UI (Radix UI)**
-> - **Acessibilidade Nativa**: Garantia de que cada interação seja amigável a tecnologias assistivas e navegação por toque.
-> - **Customização**: Hit targets de **60px** configurados em todos os elementos clicáveis.
->
-> **Animações: Framer Motion**
-> - Feedback cognitivo suave para sucessos e erros.
+### Components
 
-## 2. Diretrizes de Design UX Senior (85+ anos)
-Assumindo o papel de **UX Designer Senior**, aplicaremos os seguintes pilares:
+#### [MODIFY] [App.tsx](file:///d:/projects/anti/to-my-mother/src/App.tsx)
+- Ensure background colors and text colors are applied following the new contrast-heavy theme.
+- Enhance hierarchy of titles and subtitles.
 
-> [!IMPORTANT]
-> **2.1 Acessibilidade Visual**: Contraste 7:1 (Azul Marinho sobre Creme), fontes Sans-Serif peso médio, letras do grid em 28px+.
-> **2.2 Ergonomia Táctil**: Hit targets de 60px. Seleção flexível (Arraste ou Toque Sequencial).
-> **2.3 Evolução e Recompensa**: Salvaremos o progresso no `localStorage` para que ela possa ver sua "Galeria de Vitórias".
+#### [MODIFY] [GameMenu.tsx](file:///d:/projects/anti/to-my-mother/src/components/GameMenu.tsx)
+- [x] Improve contrast of buttons and icons.
+- [x] Make the "Status Card" and "Difficulty Selector" more prominent.
+- [x] Increase font weight for important labels.
 
-## 3. User Review Required
-> [!IMPORTANT]
-> **Offline Total**: O jogo funcionará 100% sem internet após o primeiro acesso.
-> **Persistência**: Gostaríamos de salvar cada jogo completado em uma "Galeria". Você acha legal se cada vitória mostrasse uma frase carinhosa ou uma foto de família?
+#### [MODIFY] [WordSearch.tsx](file:///d:/projects/anti/to-my-mother/src/components/WordSearch.tsx)
+- [x] Darken header background and text.
+- [x] Increase grid cell font weight and contrast.
+- [x] Improve visibility of found words (use darker greens).
+- [x] Enhance the word list at the bottom with higher contrast borders and text.
+- [x] Update victory modal colors for maximum clarity.
+- [MODIFY] Lock `GRID_SIZE` to 8 for all levels.
+- [MODIFY] Use negative margins (`-mx-8`) on the grid container to bleed to the edges of the main card.
+- [MODIFY] Increase cell size to `w-10 h-10` (or larger if possible) and font size to `text-3xl`.
+- [MODIFY] Adjust word placement logic to handle 8x8 exclusively.
+- [MODIFY] Simplify the word list to avoid overcrowding below the large grid.
 
-## 4. Mudanças Propostas
+## Verification Plan
 
-### 4.1 Interface, Persistência e Afeto (React + Shadcn/UI)
-#### [NEW] [storage.ts](file:///d:/projects/anti/power-ai/to-my-mother/src/lib/storage.ts)
-- Lógica para salvar progresso e histórico de jogos completados no navegador.
+### Automated Checks
+- Ensure the build completes without errors.
 
-#### [NEW] [phrases.ts](file:///d:/projects/anti/power-ai/to-my-mother/src/lib/phrases.ts)
-- Coleção de frases carinhosas e encorajadoras para serem exibidas após cada vitória.
-
-#### [NEW] [WordSearch.tsx](file:///d:/projects/anti/power-ai/to-my-mother/src/components/WordSearch.tsx)
-- Componente principal com suporte a Toque Sequencial e exibição da mensagem de vitória.
-
-### 4.2 Infraestrutura Offline (PWA)
-#### [NEW] [vite.config.ts](file:///d:/projects/anti/power-ai/to-my-mother/vite.config.ts)
-- Configuração do `vite-plugin-pwa` para suporte offline total.
-
-## 5. Plano de Verificação
-
-### 5.1 Verificação Manual
-- Validar se ao fechar e abrir o app o progresso é mantido.
-- Verificar se o histórico de vitórias é exibido corretamente.
-- Testar legibilidade com "filtro de visão reduzida".
+### Manual Verification
+- Test all difficulties to verify the grid adjusts correctly.
+- Verify that letters are significantly larger and easier to read.
