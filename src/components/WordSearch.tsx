@@ -4,8 +4,6 @@ import { saveProgress } from '../lib/storage';
 import { RotateCcw, ChevronLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const GRID_SIZE = 10;
-
 interface Cell {
     char: string;
     row: number;
@@ -18,6 +16,8 @@ interface WordSearchProps {
 }
 
 const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
+    const GRID_SIZE = difficulty === 'DIFICIL' ? 9 : 8;
+
     // Filter categories by selected difficulty
     const availableCategories = CATEGORIES.filter(c => c.difficulty === difficulty);
     const [currentCategory, setCurrentCategory] = useState<WordCategory>(
@@ -40,10 +40,11 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
 
     const initGame = () => {
         // Determin words per game based on difficulty
-        const wordsPerGame = difficulty === 'FACIL' ? 4 : difficulty === 'MEDIO' ? 6 : 8;
+        const wordsPerGame = difficulty === 'FACIL' ? 4 : difficulty === 'MEDIO' ? 5 : 6;
 
-        // Pick random subset of words from category pool
-        const wordPool = [...currentCategory.words].sort(() => Math.random() - 0.5);
+        // Pick words that fit in current grid size
+        const validWords = currentCategory.words.filter(w => w.length <= GRID_SIZE);
+        const wordPool = [...validWords].sort(() => Math.random() - 0.5);
         const selectedWords = wordPool.slice(0, wordsPerGame);
         setActiveWords(selectedWords);
 
@@ -56,13 +57,16 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
             while (!placed && attempts < 100) {
                 attempts++;
                 const isHorizontal = Math.random() > 0.5;
-                const isDiagonal = difficulty === 'DIFICIL' && Math.random() > 0.6;
+                const isDiagonal = difficulty === 'DIFICIL' && Math.random() > 0.7;
 
                 let dir = isHorizontal ? 'H' : 'V';
                 if (isDiagonal) dir = 'D';
 
-                const row = Math.floor(Math.random() * (dir === 'H' ? GRID_SIZE : GRID_SIZE - word.length + 1));
-                const col = Math.floor(Math.random() * (dir === 'V' ? GRID_SIZE : GRID_SIZE - word.length + 1));
+                const rowLimit = dir === 'H' ? GRID_SIZE : GRID_SIZE - word.length + 1;
+                const colLimit = dir === 'V' ? GRID_SIZE : GRID_SIZE - word.length + 1;
+
+                const row = Math.floor(Math.random() * rowLimit);
+                const col = Math.floor(Math.random() * colLimit);
 
                 // Check if fits
                 let fits = true;
@@ -139,7 +143,8 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                 for (let i = 0; i <= steps; i++) {
                     const r = startCell.row + (i * stepR);
                     const c = startCell.col + (i * stepC);
-                    newSelection.push(grid[Math.round(r)][Math.round(c)]);
+                    const cell = grid[Math.round(r)]?.[Math.round(c)];
+                    if (cell) newSelection.push(cell);
                 }
 
                 setSelection(newSelection);
@@ -199,7 +204,10 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
             </div>
 
             <div
-                className="grid grid-cols-10 gap-1.5 bg-slate-200 p-2 rounded-[32px] shadow-inner select-none touch-none border-4 border-white"
+                className="grid gap-2 bg-slate-200 p-3 rounded-[32px] shadow-inner select-none touch-none border-4 border-white justify-center"
+                style={{
+                    gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`
+                }}
                 onMouseMove={handleTouchMove}
                 onMouseUp={handleTouchEnd}
                 onTouchMove={handleTouchMove}
@@ -213,8 +221,8 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                         onMouseDown={() => handleTouchStart(cell)}
                         onTouchStart={() => handleTouchStart(cell)}
                         className={`
-              w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center 
-              text-xl font-black rounded-xl transition-all
+              w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center 
+              text-2xl font-black rounded-xl transition-all
               ${isSelected(r, c)
                                 ? 'bg-primary text-white scale-110 z-10 shadow-lg'
                                 : isCellFound(r, c)

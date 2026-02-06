@@ -12,10 +12,10 @@ export default defineConfig({
             registerType: 'autoUpdate',
             includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
             manifest: {
-                name: 'Caça-Palavras 1941',
-                short_name: 'Caça-Palavras',
-                description: 'Um jogo de caça-palavras nostálgico para Mamãe',
-                theme_color: '#fdfbf7',
+                name: 'Para Mamãe - Jogos Nostálgicos',
+                short_name: 'Para Mamãe',
+                description: 'Uma suíte de jogos nostálgicos e acessíveis para seniores',
+                theme_color: '#ffffff',
                 icons: [
                     {
                         src: 'pwa-192x192.png',
