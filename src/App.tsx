@@ -18,10 +18,10 @@ function AppContent() {
             >
                 <Routes>
                     <Route path="/" element={<GameMenu />} />
-                    <Route path="/jogo/palavras" element={<WordSearch />} />
-                    <Route path="/jogo/memoria" element={<MemoryGame />} />
-                    <Route path="/jogo/forca" element={<Hangman />} />
-                    <Route path="/jogo/figuras" element={<FigureFind />} />
+                    <Route path="/game/word-search" element={<WordSearch />} />
+                    <Route path="/game/memory-game" element={<MemoryGame />} />
+                    <Route path="/game/hangman" element={<Hangman />} />
+                    <Route path="/game/figure-find" element={<FigureFind />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </motion.main>

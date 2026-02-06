@@ -57,7 +57,7 @@ const GameMenu: React.FC = () => {
             description: 'Encontre palavras escondidas e treine seu olhar.',
             icon: Search,
             color: 'bg-emerald-100 text-emerald-600',
-            path: '/jogo/palavras'
+            path: '/game/word-search'
         },
         {
             id: 'memoria',
@@ -65,7 +65,7 @@ const GameMenu: React.FC = () => {
             description: 'Exercite sua mente combinando figuras nostálgicas.',
             icon: Grid2X2,
             color: 'bg-blue-100 text-blue-600',
-            path: '/jogo/memoria'
+            path: '/game/memory-game'
         },
         {
             id: 'forca',
@@ -73,7 +73,7 @@ const GameMenu: React.FC = () => {
             description: 'Adivinhe a palavra para manter a árvore florida.',
             icon: Flower2,
             color: 'bg-pink-100 text-pink-600',
-            path: '/jogo/forca'
+            path: '/game/hangman'
         },
         {
             id: 'figures',
@@ -81,7 +81,7 @@ const GameMenu: React.FC = () => {
             description: 'Encontre o objeto escondido entre lembranças.',
             icon: Image,
             color: 'bg-orange-100 text-orange-600',
-            path: '/jogo/figuras'
+            path: '/game/figure-find'
         }
     ];
 
