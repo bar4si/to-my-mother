@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { useGame } from '../../contexts/GameContext';
 import { Star } from 'lucide-react';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
 import { MEMORY_THEMES, MemoryCard, generateCards, MemoryTheme } from '../../lib/memory';
-import { saveProgress } from '../../lib/storage';
 import { getMemoryGameConfig } from '../../lib/gameConfig';
-import { VICTORY_PHRASES, Difficulty } from '../../lib/phrases';
+import { VICTORY_PHRASES } from '../../lib/phrases';
 
-interface MemoryGameProps {
-    difficulty: Difficulty;
-    onBack: () => void;
-}
-
-const MemoryGame: React.FC<MemoryGameProps> = ({ difficulty, onBack }) => {
+const MemoryGame: React.FC = () => {
+    const { progress, updateScore } = useGame();
+    const navigate = useNavigate();
+    const difficulty = progress.preferredDifficulty!;
+    const onBack = () => navigate('/');
     const config = getMemoryGameConfig(difficulty);
     const [currentTheme, setCurrentTheme] = useState<MemoryTheme>(MEMORY_THEMES[0]);
     const [cards, setCards] = useState<MemoryCard[]>([]);
@@ -64,7 +64,7 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ difficulty, onBack }) => {
                     if (allMatched) {
                         setIsWon(true);
                         setVictoryMessage(VICTORY_PHRASES[Math.floor(Math.random() * VICTORY_PHRASES.length)]);
-                        saveProgress('memory-' + currentTheme.id, difficulty === 'FACIL' ? 1 : difficulty === 'MEDIO' ? 5 : 10);
+                        updateScore('memory-' + currentTheme.id, difficulty === 'FACIL' ? 1 : difficulty === 'MEDIO' ? 5 : 10);
                     }
                 }, 600);
             } else {

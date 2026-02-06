@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { useGame } from '../../contexts/GameContext';
 import { FIGURE_THEMES, FigureTheme, GameFigure } from '../../lib/figures';
 import { RotateCcw, Lightbulb } from 'lucide-react';
-import { Difficulty, VICTORY_PHRASES } from '../../lib/phrases';
+import { VICTORY_PHRASES } from '../../lib/phrases';
 import { getFigureFindConfig } from '../../lib/gameConfig';
-import { saveProgress } from '../../lib/storage';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
 
-interface FigureFindProps {
-    difficulty: Difficulty;
-    onBack: () => void;
-}
-
-const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
+const FigureFind: React.FC = () => {
+    const { progress, updateScore } = useGame();
+    const navigate = useNavigate();
+    const difficulty = progress.preferredDifficulty!;
+    const onBack = () => navigate('/');
     const [theme, setTheme] = useState<FigureTheme>(
         FIGURE_THEMES[Math.floor(Math.random() * FIGURE_THEMES.length)]
     );
@@ -103,7 +103,7 @@ const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
         if (figure.isTarget) {
             setIsWon(true);
             setVictoryMessage(VICTORY_PHRASES[Math.floor(Math.random() * VICTORY_PHRASES.length)]);
-            saveProgress('figures', difficulty === 'FACIL' ? 1 : difficulty === 'MEDIO' ? 5 : 10);
+            updateScore('figures-' + theme.id, difficulty === 'FACIL' ? 1 : difficulty === 'MEDIO' ? 5 : 10);
         }
     };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CATEGORIES, VICTORY_PHRASES, Difficulty, WordCategory } from '../../lib/phrases';
-import { saveProgress } from '../../lib/storage';
+import { useNavigate } from 'react-router-dom';
+import { useGame } from '../../contexts/GameContext';
+import { CATEGORIES, VICTORY_PHRASES, WordCategory } from '../../lib/phrases';
 import { getWordSearchConfig } from '../../lib/gameConfig';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
@@ -11,12 +12,11 @@ interface Cell {
     col: number;
 }
 
-interface WordSearchProps {
-    difficulty: Difficulty;
-    onBack: () => void;
-}
-
-const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
+const WordSearch: React.FC = () => {
+    const { progress, updateScore } = useGame();
+    const navigate = useNavigate();
+    const difficulty = progress.preferredDifficulty!;
+    const onBack = () => navigate('/');
     const config = getWordSearchConfig(difficulty);
     const ROWS = config.rows;
     const COLS = config.cols;
@@ -193,7 +193,7 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                 if (newFound.length === activeWords.length) {
                     setIsWon(true);
                     setVictoryMessage(VICTORY_PHRASES[Math.floor(Math.random() * VICTORY_PHRASES.length)]);
-                    saveProgress(currentCategory.id, difficulty === 'FACIL' ? 1 : difficulty === 'MEDIO' ? 5 : 10); // Save by ID with specific points
+                    updateScore(currentCategory.id, difficulty === 'FACIL' ? 1 : difficulty === 'MEDIO' ? 5 : 10); // Save by ID with specific points
                 }
             }
         }

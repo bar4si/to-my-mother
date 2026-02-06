@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useGame } from '../../contexts/GameContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, Star, Lightbulb, Flower2 } from 'lucide-react';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
 import { HANGMAN_CATEGORIES, getRandomCategory, getRandomWord, HangmanCategory } from '../../lib/hangman';
-import { saveProgress } from '../../lib/storage';
 import { getHangmanConfig } from '../../lib/gameConfig';
-import { VICTORY_PHRASES, Difficulty } from '../../lib/phrases';
-
-interface HangmanProps {
-    difficulty: Difficulty;
-    onBack: () => void;
-}
+import { VICTORY_PHRASES } from '../../lib/phrases';
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-const Hangman: React.FC<HangmanProps> = ({ difficulty, onBack }) => {
+const Hangman: React.FC = () => {
+    const { progress, updateScore } = useGame();
+    const navigate = useNavigate();
+    const difficulty = progress.preferredDifficulty!;
+    const onBack = () => navigate('/');
     const config = getHangmanConfig(difficulty);
     const [category, setCategory] = useState<HangmanCategory>(HANGMAN_CATEGORIES[0]);
     const [wordData, setWordData] = useState({ term: "", hint: "" });
@@ -74,7 +74,7 @@ const Hangman: React.FC<HangmanProps> = ({ difficulty, onBack }) => {
             if (allLettersGuessed) {
                 setIsWon(true);
                 setVictoryMessage(VICTORY_PHRASES[Math.floor(Math.random() * VICTORY_PHRASES.length)]);
-                saveProgress('hangman-' + category.id, difficulty === 'FACIL' ? 2 : difficulty === 'MEDIO' ? 6 : 12);
+                updateScore('hangman-' + category.id, difficulty === 'FACIL' ? 1 : difficulty === 'MEDIO' ? 5 : 10);
             }
         }
     };

@@ -1,17 +1,13 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, Grid2X2, Star, Flower2, Image } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { GameProgress, updateCelebratedLevel } from '../../lib/storage';
-import { Difficulty } from '../../lib/phrases';
+import { useGame } from '../../contexts/GameContext';
 import { getAchievementStatus } from '../../lib/achievement';
 
-interface GameMenuProps {
-    progress: GameProgress;
-    onSelectGame: (gameId: string) => void;
-    onSetDifficulty: (difficulty: Difficulty) => void;
-}
-
-const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDifficulty }) => {
+const GameMenu: React.FC = () => {
+    const { progress, setDifficulty, markLevelCelebrated } = useGame();
+    const navigate = useNavigate();
     const status = getAchievementStatus(progress.score);
     const BadgeIcon = status.currentBadge.icon;
 
@@ -50,38 +46,42 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
             }, 250);
 
             // Persist that we celebrated this level
-            updateCelebratedLevel(currentLevel);
+            markLevelCelebrated(currentLevel);
         }
-    }, [status.currentBadge.level, progress.lastCelebratedLevel]);
+    }, [status.currentBadge.level, progress.lastCelebratedLevel, markLevelCelebrated]);
 
     const games = [
         {
-            id: 'wordsearch',
+            id: 'palavras',
             name: 'Caça-Palavras',
             description: 'Encontre palavras escondidas e treine seu olhar.',
             icon: Search,
-            color: 'bg-emerald-100 text-emerald-600'
+            color: 'bg-emerald-100 text-emerald-600',
+            path: '/jogo/palavras'
         },
         {
-            id: 'memory',
+            id: 'memoria',
             name: 'Jogo da Memória',
             description: 'Exercite sua mente combinando figuras nostálgicas.',
             icon: Grid2X2,
-            color: 'bg-blue-100 text-blue-600'
+            color: 'bg-blue-100 text-blue-600',
+            path: '/jogo/memoria'
         },
         {
-            id: 'hangman',
+            id: 'forca',
             name: 'Forca das Flores',
             description: 'Adivinhe a palavra para manter a árvore florida.',
             icon: Flower2,
-            color: 'bg-pink-100 text-pink-600'
+            color: 'bg-pink-100 text-pink-600',
+            path: '/jogo/forca'
         },
         {
             id: 'figures',
             name: 'Caça-Figuras',
             description: 'Encontre o objeto escondido entre lembranças.',
             icon: Image,
-            color: 'bg-orange-100 text-orange-600'
+            color: 'bg-orange-100 text-orange-600',
+            path: '/jogo/figuras'
         }
     ];
 
@@ -90,6 +90,14 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
         { id: 'MEDIO', label: 'Médio', color: 'bg-blue-100 text-blue-900 border-blue-200' },
         { id: 'DIFICIL', label: 'Difícil', color: 'bg-purple-100 text-purple-900 border-purple-200' },
     ];
+
+    const handleSelectGame = (path: string) => {
+        if (!progress.preferredDifficulty) {
+            alert("Por favor, selecione um nível antes de começar!");
+            return;
+        }
+        navigate(path);
+    };
 
     return (
         <div className="flex flex-col gap-8 w-full">
@@ -156,7 +164,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                             return (
                                 <button
                                     key={config.id}
-                                    onClick={() => onSetDifficulty(config.id as Difficulty)}
+                                    onClick={() => setDifficulty(config.id as any)}
                                     className={`flex-1 py-3 px-1 transition-all relative overflow-hidden active:scale-95 ${isSelected
                                         ? `bg-white`
                                         : 'text-slate-400 hover:bg-white/50'
@@ -182,7 +190,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                     return (
                         <button
                             key={game.id}
-                            onClick={() => onSelectGame(game.id)}
+                            onClick={() => handleSelectGame(game.path)}
                             className="hit-target flex flex-col items-center gap-4 transition-all active:scale-90 group"
                         >
                             <div className={`w-full aspect-square rounded-[40px] flex items-center justify-center ${game.color} shadow-xl shadow-slate-200/50 border-b-8 border-black/5 group-hover:shadow-2xl group-hover:-translate-y-1 group-active:translate-y-0.5 group-active:border-b-0 transition-all relative overflow-hidden`}>
