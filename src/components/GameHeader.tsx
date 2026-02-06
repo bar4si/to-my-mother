@@ -23,7 +23,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({ title, subtitle, onBack, action
                     {title}
                 </h2>
                 {subtitle && (
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-slate-600 font-extrabold block">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-slate-600 font-extrabold block leading-tight max-w-[200px] mx-auto mt-0.5">
                         {subtitle}
                     </span>
                 )}

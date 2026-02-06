@@ -86,9 +86,9 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
     ];
 
     const difficultyConfig = [
-        { id: 'FACIL', label: 'Iniciante', icon: Sprout, color: 'bg-green-100 text-green-900' },
-        { id: 'MEDIO', label: 'Médio', icon: Coffee, color: 'bg-blue-100 text-blue-900' },
-        { id: 'DIFICIL', label: 'Especialista', icon: Brain, color: 'bg-purple-100 text-purple-900' },
+        { id: 'FACIL', label: 'Calmo', color: 'bg-green-100 text-green-900 border-green-200' },
+        { id: 'MEDIO', label: 'Ativo', color: 'bg-blue-100 text-blue-900 border-blue-200' },
+        { id: 'DIFICIL', label: 'Mestre', color: 'bg-purple-100 text-purple-900 border-purple-200' },
     ];
 
     return (
@@ -127,31 +127,9 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                         </div>
                     </div>
 
-                    {/* Compact Difficulty Selector */}
-                    <div className="bg-slate-50/80 rounded-2xl p-1.5 border border-slate-100 flex gap-1 shadow-inner">
-                        {difficultyConfig.map((config) => {
-                            const Icon = config.icon;
-                            const isSelected = progress.preferredDifficulty === config.id;
-                            return (
-                                <button
-                                    key={config.id}
-                                    onClick={() => onSetDifficulty(config.id as Difficulty)}
-                                    className={`flex-1 flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl transition-all active:scale-95 ${isSelected
-                                        ? `${config.color} shadow-sm border-2 border-white scale-105 z-10`
-                                        : 'text-slate-400 hover:text-slate-600'
-                                        }`}
-                                >
-                                    <Icon className={`w-5 h-5 ${isSelected ? 'animate-bounce' : ''}`} strokeWidth={3} />
-                                    <span className="text-[9px] font-black uppercase tracking-tighter">
-                                        {config.label}
-                                    </span>
-                                </button>
-                            );
-                        })}
-                    </div>
 
                     {/* Streamlined Progress Section */}
-                    <div className="space-y-2">
+                    <div className="space-y-2 mb-2">
                         <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200/50 shadow-inner">
                             <div
                                 className="h-full bg-gradient-to-r from-primary to-primary-600 transition-all duration-1000 ease-out rounded-full shadow-lg"
@@ -159,7 +137,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                             />
                         </div>
 
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center px-1">
                             {status.nextBadge ? (
                                 <p className="text-[9px] font-bold text-slate-400 uppercase tracking-tight">
                                     Faltam <span className="text-primary font-black">{status.pointsToNext}</span> para <span className="text-slate-600 font-extrabold">{status.nextBadge.title}</span>
@@ -169,6 +147,30 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                             )}
                             <span className="text-[9px] font-black text-primary bg-primary/5 px-2 py-0.5 rounded-full">{status.progress}%</span>
                         </div>
+                    </div>
+
+                    {/* Integrated Difficulty Tabs at the Base */}
+                    <div className="flex -mx-5 -mb-5 border-t border-slate-100 bg-slate-50/50">
+                        {difficultyConfig.map((config) => {
+                            const isSelected = progress.preferredDifficulty === config.id;
+                            return (
+                                <button
+                                    key={config.id}
+                                    onClick={() => onSetDifficulty(config.id as Difficulty)}
+                                    className={`flex-1 py-3 px-1 transition-all relative overflow-hidden active:scale-95 ${isSelected
+                                        ? `bg-white`
+                                        : 'text-slate-400 hover:bg-white/50'
+                                        }`}
+                                >
+                                    {/* Selection Indicator Bar */}
+                                    <div className={`absolute top-0 left-0 right-0 h-1.5 transition-transform duration-300 ${isSelected ? config.color.split(' ')[0] : 'translate-y-[-100%]'}`} />
+
+                                    <span className={`text-[10px] font-black uppercase tracking-widest block text-center transition-colors ${isSelected ? config.color.split(' ')[1] : ''}`}>
+                                        {config.label}
+                                    </span>
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
