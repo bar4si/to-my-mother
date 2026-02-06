@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FIGURE_THEMES, FigureTheme, GameFigure } from '../lib/figures';
-import { ChevronLeft, RotateCcw, Lightbulb } from 'lucide-react';
+import { RotateCcw, Lightbulb } from 'lucide-react';
 import { Difficulty, VICTORY_PHRASES } from '../lib/phrases';
 import { getFigureFindConfig } from '../lib/gameConfig';
 import { saveProgress } from '../lib/storage';
+import GameHeader from './GameHeader';
 
 interface FigureFindProps {
     difficulty: Difficulty;
@@ -25,8 +26,11 @@ const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
         const config = getFigureFindConfig(difficulty);
         const newFigures: GameFigure[] = [];
 
-        // Select a random icon from the theme to be the target
+        // 1. Select a random icon from the theme to be the target
         const targetIcon = theme.icons[Math.floor(Math.random() * theme.icons.length)];
+
+        // 2. Prepare distractors pool (all icons except the target one)
+        const distractorsPool = theme.icons.filter(icon => icon !== targetIcon);
 
         // Generate positions
         if (config.gridMode) {
@@ -36,7 +40,14 @@ const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
             const targetIdx = Math.floor(Math.random() * config.itemCount);
 
             for (let i = 0; i < config.itemCount; i++) {
-                const icon = i === targetIdx ? targetIcon : theme.icons[Math.floor(Math.random() * theme.icons.length)];
+                // For beginners, we want absolute diversity if possible (by default)
+                // If allowDistractorDuplicates is true, we pick randomly
+                const icon = i === targetIdx
+                    ? targetIcon
+                    : config.allowDistractorDuplicates
+                        ? distractorsPool[Math.floor(Math.random() * distractorsPool.length)]
+                        : distractorsPool[i % distractorsPool.length];
+
                 newFigures.push({
                     id: `fig-${i}`,
                     icon,
@@ -53,11 +64,19 @@ const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
             const width = 300;
             const height = 300;
 
+            const targetIdxInShuffle = Math.floor(Math.random() * config.itemCount);
+
             for (let i = 0; i < config.itemCount; i++) {
-                const isTarget = i === 0;
+                const isTarget = i === targetIdxInShuffle;
+                const icon = isTarget
+                    ? targetIcon
+                    : config.allowDistractorDuplicates
+                        ? distractorsPool[Math.floor(Math.random() * distractorsPool.length)]
+                        : distractorsPool[i % distractorsPool.length];
+
                 newFigures.push({
                     id: `fig-${i}`,
-                    icon: isTarget ? targetIcon : theme.icons[Math.floor(Math.random() * theme.icons.length)],
+                    icon,
                     x: padding + Math.random() * (width - padding * 2),
                     y: padding + Math.random() * (height - padding * 2),
                     rotation: difficulty === 'DIFICIL' ? Math.random() * 360 : 0,
@@ -65,8 +84,6 @@ const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
                     isTarget
                 });
             }
-            // Shuffle so target isn't always the first one drawn (z-index)
-            newFigures.sort(() => Math.random() - 0.5);
         }
 
         setFigures(newFigures);
@@ -91,19 +108,13 @@ const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
 
     return (
         <div className="flex flex-col gap-6 w-full h-full">
-            {/* Header - Zen Mode Style */}
-            <div className="flex justify-between items-center bg-slate-100 -mx-8 -mt-8 p-6 border-b-2 border-slate-200 mb-2">
-                <button onClick={onBack} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <ChevronLeft className="w-8 h-8 text-primary" />
-                </button>
-                <div className="text-center">
-                    <h2 className="text-xl font-black text-primary leading-tight uppercase tracking-tight">Caça-Figuras</h2>
-                    <span className="text-xs uppercase tracking-[0.2em] text-slate-600 font-extrabold">{theme.name}</span>
-                </div>
-                <button onClick={initGame} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
-                    <RotateCcw className="w-8 h-8 text-primary" />
-                </button>
-            </div>
+            <GameHeader
+                title="Caça-Figuras"
+                subtitle={theme.name}
+                onBack={onBack}
+                actionIcon={RotateCcw}
+                onAction={initGame}
+            />
 
             {/* Target Display */}
             <div className="flex flex-col items-center gap-2">
@@ -133,7 +144,8 @@ const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
                                 whileTap={{ scale: 0.9 }}
                                 onClick={() => handleFigureClick(fig)}
                                 className={`absolute w-14 h-14 flex items-center justify-center rounded-2xl transition-all
-                                    ${showHint && fig.isTarget ? 'ring-4 ring-yellow-400 ring-offset-4 animate-bounce z-50 bg-white shadow-xl' : ''}
+                                    ${fig.isTarget ? 'z-20' : 'z-0'}
+                                    ${showHint && fig.isTarget ? 'ring-4 ring-yellow-400 ring-offset-4 animate-bounce !z-50 bg-white shadow-xl' : ''}
                                 `}
                                 style={{
                                     left: 0,

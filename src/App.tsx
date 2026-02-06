@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import WordSearch from './components/WordSearch'
 import MemoryGame from './components/MemoryGame'
 import Hangman from './components/Hangman'
+import FigureFind from './components/FigureFind'
 import GameMenu from './components/GameMenu'
 import { getProgress, saveDifficulty, GameProgress } from './lib/storage'
 import { Difficulty } from './lib/phrases'
@@ -74,6 +75,21 @@ function App() {
                             exit={{ opacity: 0, scale: 0.95 }}
                         >
                             <Hangman
+                                difficulty={progress.preferredDifficulty}
+                                onBack={() => {
+                                    setCurrentGame(null);
+                                    refreshProgress();
+                                }}
+                            />
+                        </motion.div>
+                    ) : currentGame === 'figures' && progress.preferredDifficulty ? (
+                        <motion.div
+                            key="figures"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                        >
+                            <FigureFind
                                 difficulty={progress.preferredDifficulty}
                                 onBack={() => {
                                     setCurrentGame(null);

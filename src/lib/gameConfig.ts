@@ -29,6 +29,7 @@ export interface FigureFindConfig {
     columns?: number;
     overlap: boolean;
     rotationEnabled: boolean;
+    allowDistractorDuplicates: boolean;
 }
 
 export interface HangmanConfig {

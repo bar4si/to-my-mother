@@ -58,19 +58,22 @@ export const FIGURE_FIND_DIFFICULTIES: Record<Difficulty, FigureFindConfig> = {
         gridMode: true,
         columns: 3,
         overlap: false,
-        rotationEnabled: false
+        rotationEnabled: false,
+        allowDistractorDuplicates: true
     },
     MEDIO: {
         itemCount: 20,
         gridMode: false,
         overlap: false,
-        rotationEnabled: false
+        rotationEnabled: false,
+        allowDistractorDuplicates: false
     },
     DIFICIL: {
         itemCount: 45,
         gridMode: false,
         overlap: true,
-        rotationEnabled: true
+        rotationEnabled: true,
+        allowDistractorDuplicates: false
     }
 };
 

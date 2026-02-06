@@ -39,14 +39,11 @@ export const MEMORY_THEMES: MemoryTheme[] = [
         description: 'Delícias e utensílios que trazem lembranças doces.',
         icons: [
             Coffee, Dessert, Utensils, Apple, CakeSlice, ChefHat, Pizza, Soup,
-            Candy, Coffee, Dessert, Utensils, Apple, CakeSlice, ChefHat, Pizza,
-            Soup, Candy, ShoppingBag, ShoppingCart, Apple, CakeSlice, ChefHat, Pizza,
-            Soup, Candy, Coffee, Dessert, Utensils, Apple, CakeSlice, ChefHat,
-            Dog, Cat, Rabbit, Turtle, Snail, Crown, Diamond, Trophy,
-            Medal, Rocket, Dumbbell, Gamepad2, Guitar, Drum, Piano, Mic,
-            Telescope, Microscope, Book, Pencil, Brush, Music2, HeadphonesIcon, Radio,
-            Tv, Monitor, Speaker, Trash2, Search, Settings, House, ShoppingBag,
-            Apple, CakeSlice, ChefHat, Pizza, Soup, Candy, Coffee, Dessert
+            Candy, ShoppingBag, ShoppingCart, Dog, Cat, Rabbit, Turtle, Snail,
+            Crown, Diamond, Trophy, Medal, Rocket, Dumbbell, Gamepad2, Guitar,
+            Drum, Piano, Mic, Telescope, Microscope, Book, Pencil, Brush,
+            Music2, HeadphonesIcon, Radio, Tv, Monitor, Speaker, Trash2, Search,
+            Settings, House
         ]
     },
     {
@@ -55,14 +52,9 @@ export const MEMORY_THEMES: MemoryTheme[] = [
         description: 'A beleza do dia e da noite.',
         icons: [
             Bird, Feather, Cloud, Moon, Star, Sun, Music, Camera,
-            Wind, CloudSun, Cloud, Moon, Star, Sun, Music, Camera,
-            Bird, Feather, Cloud, Moon, Star, Sun, Music, Camera,
-            Wind, CloudSun, Cloud, Moon, Star, Sun, Music, Camera,
-            Palmtree, Mountain, Waves, Zap, Flame, Snowflake, Umbrella, Plane,
-            Cloud, Moon, Star, Sun, Music, Camera, Bird, Feather,
-            Wind, CloudSun, Cloud, Moon, Star, Sun, Music, Camera,
-            Telescope, Microscope, Ship, Plane, TrainFront, Bus, Ship, Tractor,
-            Dog, Cat, Rabbit, Turtle, Snail, Crown, Diamond, Trophy, Medal
+            Wind, CloudSun, Palmtree, Mountain, Waves, Zap, Flame, Snowflake,
+            Umbrella, Plane, Telescope, Microscope, Ship, TrainFront, Bus,
+            Tractor, Dog, Cat, Rabbit, Turtle, Snail, Crown, Diamond, Trophy, Medal
         ]
     },
     {
@@ -72,12 +64,9 @@ export const MEMORY_THEMES: MemoryTheme[] = [
         icons: [
             Music, Camera, Heart, Star, Moon, Flower, Sun, Candy,
             ImageIcon, Bell, Clock, Key, Mail, Phone, Gift, Scissors,
-            Music, Camera, Heart, Star, Moon, Flower, Sun, Candy,
-            ImageIcon, Bell, Clock, Key, Mail, Phone, Gift, Scissors,
             Book, Pencil, Brush, Music2, HeadphonesIcon, Radio, Tv, Monitor, Speaker,
             Search, Settings, House, ShoppingBag, Truck, Car, Bike, Plane,
             TrainFront, Bus, Ship, Tractor, MountainSnow, Telescope, Microscope,
-            Bell, Clock, Key, Mail, Phone, Gift, Scissors, ImageIcon,
             Dog, Cat, Rabbit, Turtle, Snail, Crown, Diamond, Trophy, Medal, Rocket
         ]
     }

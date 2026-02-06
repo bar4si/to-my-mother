@@ -11,6 +11,10 @@ Uma suíte de jogos nostálgicos e acessíveis, criada com todo o carinho para m
   - Uma versão acolhedora e positiva do clássico jogo da forca.
   - Árvore da Sorte orgânica em SVG com pétalas de flores que caem graciosamente.
   - Categorias nostálgicas: Receitas de Família, Coisas de Casa, Flores e Jardim.
+- **Caça-Figuras (Encontre a Figura)**:
+  - Treine a atenção encontrando objetos específicos em temas afetivos.
+  - Grade progressiva para iniciante e espalhamento aleatório para especialistas.
+  - Temas: Cozinha da Vovó, Jardim Florido, Coisas de Casa e Passeio no Parque.
 - **Progressão e Recompensas**:
   - Ganhe pontos para desbloquear **15 insígnias afetivas** (de "Doutora em Carinho" a "Amor Infinito").
   - Sistema de celebração persistente com chuva de confetes.
@@ -24,6 +28,7 @@ Uma suíte de jogos nostálgicos e acessíveis, criada com todo o carinho para m
 - **🔍 Caça-Palavras**: Mais de 50.000 combinações únicas em três níveis.
 - **🧠 Jogo da Memória**: Combine ícones nostálgicos em um grid otimizado.
 - **🌳 Forca das Flores**: Adivinhe palavras para manter a árvore florida.
+- **🖼️ Caça-Figuras**: Encontre o objeto perdido entre memórias afetuosas.
 
 ## 🛠️ Tecnologias
 

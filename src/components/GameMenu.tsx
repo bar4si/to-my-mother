@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Sprout, Coffee, Brain, Search, Grid2X2, Star, Flower2 } from 'lucide-react';
+import { Sprout, Coffee, Brain, Search, Grid2X2, Star, Flower2, Image } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { GameProgress, updateCelebratedLevel } from '../lib/storage';
 import { Difficulty } from '../lib/phrases';
@@ -75,6 +75,13 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
             description: 'Adivinhe a palavra para manter a árvore florida.',
             icon: Flower2,
             color: 'bg-pink-100 text-pink-600'
+        },
+        {
+            id: 'figures',
+            name: 'Caça-Figuras',
+            description: 'Encontre o objeto escondido entre lembranças.',
+            icon: Image,
+            color: 'bg-orange-100 text-orange-600'
         }
     ];
 
