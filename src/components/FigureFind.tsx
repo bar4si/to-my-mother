@@ -6,6 +6,7 @@ import { Difficulty, VICTORY_PHRASES } from '../lib/phrases';
 import { getFigureFindConfig } from '../lib/gameConfig';
 import { saveProgress } from '../lib/storage';
 import GameHeader from './GameHeader';
+import GameModal from './GameModal';
 
 interface FigureFindProps {
     difficulty: Difficulty;
@@ -176,47 +177,23 @@ const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
                 </button>
             </div>
 
-            {/* Victory Modal */}
-            <AnimatePresence>
-                {isWon && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-md"
-                    >
-                        <motion.div
-                            initial={{ scale: 0.9, y: 20 }}
-                            animate={{ scale: 1, y: 0 }}
-                            className="bg-white p-10 rounded-[48px] shadow-2xl text-center flex flex-col items-center gap-6 max-w-[360px] w-full border border-slate-100"
-                        >
-                            <div className="w-28 h-28 bg-yellow-400 rounded-[32px] flex items-center justify-center text-6xl shadow-xl border-4 border-white rotate-3">
-                                ✨
-                            </div>
-                            <div>
-                                <h3 className="text-3xl font-black text-slate-900 mb-2 tracking-tight">Parabéns!</h3>
-                                <p className="text-xl text-slate-700 italic font-bold max-w-[240px]">"{victoryMessage}"</p>
-                            </div>
-                            <div className="w-full flex flex-col gap-4">
-                                <button
-                                    onClick={() => {
-                                        setTheme(FIGURE_THEMES[Math.floor(Math.random() * FIGURE_THEMES.length)]);
-                                        initGame();
-                                    }}
-                                    className="hit-target bg-primary text-white w-full rounded-[24px] font-black text-xl shadow-xl hover:scale-105 active:scale-95 transition-all"
-                                >
-                                    Novo Tema
-                                </button>
-                                <button
-                                    onClick={onBack}
-                                    className="text-slate-500 font-black text-sm hover:text-primary uppercase tracking-widest transition-colors"
-                                >
-                                    Voltar ao Início
-                                </button>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            <GameModal
+                isOpen={isWon}
+                isWon={true}
+                title="Parabéns!"
+                message={victoryMessage}
+                onRestart={() => {
+                    setTheme(FIGURE_THEMES[Math.floor(Math.random() * FIGURE_THEMES.length)]);
+                    initGame();
+                }}
+                onBack={onBack}
+                confirmText="Novo Tema"
+                icon={
+                    <div className="w-24 h-24 bg-yellow-400 rounded-[32px] flex items-center justify-center text-6xl shadow-xl border-4 border-white rotate-3">
+                        ✨
+                    </div>
+                }
+            />
         </div>
     );
 };

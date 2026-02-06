@@ -3,7 +3,7 @@ import { CATEGORIES, VICTORY_PHRASES, Difficulty, WordCategory } from '../lib/ph
 import { saveProgress } from '../lib/storage';
 import { getWordSearchConfig } from '../lib/gameConfig';
 import GameHeader from './GameHeader';
-import { motion, AnimatePresence } from 'framer-motion';
+import GameModal from './GameModal';
 
 interface Cell {
     char: string;
@@ -261,47 +261,19 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                 ))}
             </div>
 
-            <AnimatePresence>
-                {isWon && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-md"
-                    >
-                        <motion.div
-                            initial={{ scale: 0.9, y: 20 }}
-                            animate={{ scale: 1, y: 0 }}
-                            className="bg-white p-10 rounded-[48px] shadow-2xl text-center flex flex-col items-center gap-6 max-w-[360px] w-full border border-slate-100"
-                        >
-                            <div className="w-28 h-28 bg-yellow-400 rounded-[32px] flex items-center justify-center text-6xl shadow-xl border-4 border-white rotate-3">
-                                🏆
-                            </div>
-                            <div>
-                                <h3 className="text-3xl font-black text-slate-900 mb-2 tracking-tight">Incrível!</h3>
-                                <p className="text-xl text-slate-700 italic font-bold max-w-[240px]">"{victoryMessage}"</p>
-                            </div>
-                            <div className="w-full flex flex-col gap-4">
-                                <button
-                                    onClick={() => {
-                                        const next = availableCategories[Math.floor(Math.random() * availableCategories.length)];
-                                        setCurrentCategory(next);
-                                        initGame();
-                                    }}
-                                    className="hit-target bg-primary text-white w-full rounded-[24px] font-black text-xl shadow-xl hover:scale-105 active:scale-95 transition-all"
-                                >
-                                    Próximo Jogo
-                                </button>
-                                <button
-                                    onClick={onBack}
-                                    className="text-slate-500 font-black text-sm hover:text-primary uppercase tracking-widest transition-colors"
-                                >
-                                    Voltar ao Início
-                                </button>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            <GameModal
+                isOpen={isWon}
+                isWon={true}
+                title="Incrível!"
+                message={victoryMessage}
+                onRestart={() => {
+                    const next = availableCategories[Math.floor(Math.random() * availableCategories.length)];
+                    setCurrentCategory(next);
+                    initGame();
+                }}
+                onBack={onBack}
+                confirmText="Próximo Jogo"
+            />
         </div>
     );
 };

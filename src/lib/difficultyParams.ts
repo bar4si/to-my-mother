@@ -3,8 +3,8 @@ import { WordSearchConfig, MemoryGameConfig, FigureFindConfig, HangmanConfig } f
 
 export const WORD_SEARCH_DIFFICULTIES: Record<Difficulty, WordSearchConfig> = {
     FACIL: {
-        rows: 8,
-        cols: 8,
+        rows: 6,
+        cols: 6,
         wordsPerGame: 4,
         allowDiagonals: false,
         allowReversed: false,

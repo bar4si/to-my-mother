@@ -19,6 +19,7 @@ Lista de melhorias e ideias para o futuro.
 ## 🎮 Novos Desafios
 - [ ] **Quebra-Cabeça Simples 🧩**: Arrastar peças grandes para formar fotos de família (upload de fotos).
 - [ ] **Adivinhando o Som 🎵**: Reconhecer sons de animais, natureza ou músicas antigas.
+- [ ] **Combinando Lembranças 🧩**: Estilo Match-3 com itens nostálgicos. Sessões curtas com objetivo claro e vitória (sem ser infinito).
 
 ## 🎨 Ajustes Visuais e UX
 - [ ] **Guia de Voz 🎙️**: Opção de leitura dos nomes e botões.

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 import GameHeader from './GameHeader';
+import GameModal from './GameModal';
 import { MEMORY_THEMES, MemoryCard, generateCards, MemoryTheme } from '../lib/memory';
 import { saveProgress } from '../lib/storage';
 import { getMemoryGameConfig } from '../lib/gameConfig';
@@ -130,47 +131,14 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ difficulty, onBack }) => {
                 </div>
             </div>
 
-            {/* Victory Modal Overlay */}
-            <AnimatePresence>
-                {isWon && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-primary/95 z-[100] flex items-center justify-center p-8 text-center"
-                    >
-                        <motion.div
-                            initial={{ scale: 0.5, y: 20 }}
-                            animate={{ scale: 1, y: 0 }}
-                            className="bg-white rounded-[48px] p-10 shadow-2xl border-4 border-accent max-w-xs w-full"
-                        >
-                            <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <Star className="w-12 h-12 text-green-600" fill="currentColor" />
-                            </div>
-                            <h2 className="text-3xl font-black text-primary mb-4 leading-tight">
-                                {victoryMessage}
-                            </h2>
-                            <p className="text-slate-600 font-bold mb-8">
-                                Você encontrou todos os pares do {currentTheme.name.toLowerCase()}!
-                            </p>
-                            <div className="flex flex-col gap-3">
-                                <button
-                                    onClick={initGame}
-                                    className="hit-target w-full bg-primary text-white rounded-3xl py-4 font-black text-xl shadow-lg active:scale-95 transition-all"
-                                >
-                                    Jogar de Novo
-                                </button>
-                                <button
-                                    onClick={onBack}
-                                    className="hit-target w-full bg-slate-100 text-slate-700 rounded-3xl py-4 font-black text-lg active:scale-95 transition-all"
-                                >
-                                    Voltar ao Menu
-                                </button>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            <GameModal
+                isOpen={isWon}
+                isWon={true}
+                title={victoryMessage}
+                message={`Você encontrou todos os pares do ${currentTheme.name.toLowerCase()}!`}
+                onRestart={initGame}
+                onBack={onBack}
+            />
         </div>
     );
 };
