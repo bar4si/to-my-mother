@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, ChevronLeft, Star } from 'lucide-react';
 import { MEMORY_THEMES, MemoryCard, generateCards, MemoryTheme } from '../lib/memory';
 import { saveProgress } from '../lib/storage';
+import { getMemoryGameConfig } from '../lib/gameConfig';
 import { VICTORY_PHRASES, Difficulty } from '../lib/phrases';
 
 interface MemoryGameProps {
@@ -11,22 +12,13 @@ interface MemoryGameProps {
 }
 
 const MemoryGame: React.FC<MemoryGameProps> = ({ difficulty, onBack }) => {
+    const config = getMemoryGameConfig(difficulty);
     const [currentTheme, setCurrentTheme] = useState<MemoryTheme>(MEMORY_THEMES[0]);
     const [cards, setCards] = useState<MemoryCard[]>([]);
     const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
     const [isWon, setIsWon] = useState(false);
     const [victoryMessage, setVictoryMessage] = useState("");
     const [isProcessing, setIsProcessing] = useState(false);
-
-    const getGameConfig = () => {
-        switch (difficulty) {
-            case 'FACIL': return { pairs: 4, time: 2000 };
-            case 'DIFICIL': return { pairs: 8, time: 800 };
-            default: return { pairs: 6, time: 1200 };
-        }
-    };
-
-    const config = getGameConfig();
 
     useEffect(() => {
         initGame();
@@ -35,7 +27,8 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ difficulty, onBack }) => {
     const initGame = () => {
         const randomTheme = MEMORY_THEMES[Math.floor(Math.random() * MEMORY_THEMES.length)];
         setCurrentTheme(randomTheme);
-        setCards(generateCards(randomTheme.id, config.pairs));
+        const pairs = Math.floor((config.rows * config.cols) / 2);
+        setCards(generateCards(randomTheme.id, pairs));
         setFlippedIndices([]);
         setIsWon(false);
         setIsProcessing(false);
@@ -77,7 +70,7 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ difficulty, onBack }) => {
                 setTimeout(() => {
                     setFlippedIndices([]);
                     setIsProcessing(false);
-                }, config.time);
+                }, config.mismatchDelay);
             }
         }
     };
@@ -102,9 +95,17 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ difficulty, onBack }) => {
 
             {/* Grid Area - Taking as much space as possible */}
             <div className="flex-1 flex items-center justify-center p-2 bg-slate-50 rounded-[40px] shadow-inner border-2 border-slate-200/50">
-                <div className="grid grid-cols-4 gap-2.5 w-full max-w-sm justify-center">
+                <div
+                    className="grid gap-1.5 w-full max-w-2xl justify-center"
+                    style={{ gridTemplateColumns: `repeat(${config.cols}, minmax(0, 1fr))` }}
+                >
                     {cards.map((card, index) => {
                         const Icon = currentTheme.icons[card.iconIndex];
+                        // Dynamic icon size based on grid density
+                        const iconSize = config.cols > 8 ? "w-6 h-6 sm:w-8 sm:h-8" :
+                            config.cols > 5 ? "w-8 h-8 sm:w-10 sm:h-10" :
+                                "w-12 h-12 sm:w-14 sm:h-14";
+
                         return (
                             <motion.div
                                 key={card.id}
@@ -127,7 +128,7 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ difficulty, onBack }) => {
                                     {/* Card Front (Revealed State) */}
                                     <div className="absolute inset-0 w-full h-full backface-hidden bg-white rounded-2xl shadow-lg border-4 border-primary/20 flex items-center justify-center rotate-y-180"
                                         style={{ transform: 'rotateY(180deg)' }}>
-                                        <Icon className={`w-14 h-14 ${card.isMatched ? 'text-green-600' : 'text-primary'}`} strokeWidth={3} />
+                                        <Icon className={`${iconSize} ${card.isMatched ? 'text-green-600' : 'text-primary'}`} strokeWidth={3} />
                                     </div>
                                 </motion.div>
                             </motion.div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CATEGORIES, VICTORY_PHRASES, Difficulty, WordCategory } from '../lib/phrases';
 import { saveProgress } from '../lib/storage';
+import { getWordSearchConfig } from '../lib/gameConfig';
 import { RotateCcw, ChevronLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,7 +17,9 @@ interface WordSearchProps {
 }
 
 const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
-    const GRID_SIZE = 8;
+    const config = getWordSearchConfig(difficulty);
+    const ROWS = config.rows;
+    const COLS = config.cols;
 
     // Filter categories by selected difficulty
     const availableCategories = CATEGORIES.filter(c => c.difficulty === difficulty);
@@ -40,13 +43,14 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
 
     const initGame = () => {
         // Determin words per game based on difficulty
-        const wordsPerGame = difficulty === 'FACIL' ? 4 : difficulty === 'MEDIO' ? 5 : 6;
+        const wordsPerGame = config.wordsPerGame;
 
         // Pick words that fit in current grid size
-        const validWords = currentCategory.words.filter(w => w.length <= GRID_SIZE);
+        const maxLen = Math.max(ROWS, COLS);
+        const validWords = currentCategory.words.filter(w => w.length <= maxLen);
         const wordPool = [...validWords].sort(() => Math.random() - 0.5);
 
-        const newGrid: string[][] = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(''));
+        const newGrid: string[][] = Array(ROWS).fill(null).map(() => Array(COLS).fill(''));
         const placedWords: string[] = [];
 
         // Try to place words from the pool until we reach wordsPerGame or run out of pool
@@ -56,20 +60,20 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
             let placed = false;
             let attempts = 0;
 
-            // For Expert, words can be reversed
-            const shouldReverse = difficulty === 'DIFICIL' && Math.random() > 0.5;
+            // Expert logic defined by config
+            const shouldReverse = config.allowReversed && Math.random() < config.reverseProbability;
             const wordToPlace = shouldReverse ? wordPoolItem.split('').reverse().join('') : wordPoolItem;
 
             while (!placed && attempts < 100) {
                 attempts++;
                 const isHorizontal = Math.random() > 0.5;
-                const isDiagonal = difficulty === 'DIFICIL' && Math.random() > 0.5;
+                const isDiagonal = config.allowDiagonals && Math.random() < config.diagonalProbability;
 
                 let dir = isHorizontal ? 'H' : 'V';
                 if (isDiagonal) dir = 'D';
 
-                const rowLimit = dir === 'H' ? GRID_SIZE : GRID_SIZE - wordToPlace.length + 1;
-                const colLimit = dir === 'V' ? GRID_SIZE : GRID_SIZE - wordToPlace.length + 1;
+                const rowLimit = dir === 'H' ? ROWS : ROWS - wordToPlace.length + 1;
+                const colLimit = dir === 'V' ? COLS : COLS - wordToPlace.length + 1;
 
                 if (rowLimit <= 0 || colLimit <= 0) continue;
 
@@ -82,7 +86,7 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                     const r = dir === 'V' ? row + i : dir === 'D' ? row + i : row;
                     const c = dir === 'H' ? col + i : dir === 'D' ? col + i : col;
 
-                    if (r >= GRID_SIZE || c >= GRID_SIZE || (newGrid[r][c] !== '' && newGrid[r][c] !== wordToPlace[i])) {
+                    if (r >= ROWS || c >= COLS || (newGrid[r][c] !== '' && newGrid[r][c] !== wordToPlace[i])) {
                         fits = false;
                         break;
                     }
@@ -218,7 +222,7 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
             <div
                 className="grid gap-1.5 bg-slate-200 p-2 rounded-[32px] shadow-inner select-none touch-none border-y-4 border-white -mx-8 w-[calc(100%+64px)] justify-center"
                 style={{
-                    gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`
+                    gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))`
                 }}
                 onMouseMove={handleTouchMove}
                 onMouseUp={handleTouchEnd}

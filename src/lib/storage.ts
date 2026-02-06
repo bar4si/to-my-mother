@@ -5,6 +5,7 @@ export interface GameProgress {
     totalWins: number;
     score: number;
     preferredDifficulty: Difficulty | null;
+    lastCelebratedLevel: number;
 }
 
 const STORAGE_KEY = 'to_my_mother_progress';
@@ -25,12 +26,19 @@ export const saveDifficulty = (difficulty: Difficulty) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
 };
 
+export const updateCelebratedLevel = (level: number) => {
+    const current = getProgress();
+    current.lastCelebratedLevel = level;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
+};
+
 export const getProgress = (): GameProgress => {
     const data = localStorage.getItem(STORAGE_KEY);
     return data ? JSON.parse(data) : {
         completedCategories: [],
         totalWins: 0,
         score: 0,
-        preferredDifficulty: null
+        preferredDifficulty: null,
+        lastCelebratedLevel: 1
     };
 };

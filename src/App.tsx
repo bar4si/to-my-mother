@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import WordSearch from './components/WordSearch'
 import MemoryGame from './components/MemoryGame'
+import Hangman from './components/Hangman'
 import GameMenu from './components/GameMenu'
 import { getProgress, saveDifficulty, GameProgress } from './lib/storage'
 import { Difficulty } from './lib/phrases'
@@ -38,8 +39,8 @@ function App() {
                         exit={{ opacity: 0, y: -20 }}
                         className="mb-6 text-center"
                     >
-                        <h1 className="mb-1 text-4xl font-black text-primary">Para Mamãe</h1>
-                        <p className="text-slate-700 italic font-bold">Momentos de alegria e diversão</p>
+                        <h1 className=" text-4xl font-black text-primary">Para Mamãe</h1>
+                        {/* <p className="text-slate-700 italic font-bold">Momentos de alegria e diversão</p> */}
                     </motion.header>
                 )}
             </AnimatePresence>
@@ -72,6 +73,21 @@ function App() {
                             exit={{ opacity: 0, scale: 0.95 }}
                         >
                             <MemoryGame
+                                difficulty={progress.preferredDifficulty}
+                                onBack={() => {
+                                    setCurrentGame(null);
+                                    refreshProgress();
+                                }}
+                            />
+                        </motion.div>
+                    ) : currentGame === 'hangman' && progress.preferredDifficulty ? (
+                        <motion.div
+                            key="hangman"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                        >
+                            <Hangman
                                 difficulty={progress.preferredDifficulty}
                                 onBack={() => {
                                     setCurrentGame(null);

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FIGURE_THEMES, FigureTheme, GameFigure } from '../lib/figures';
 import { ChevronLeft, RotateCcw, Lightbulb } from 'lucide-react';
-import { FIGURE_THEMES, FigureTheme, GameFigure, getFigureDifficultyConfig } from '../lib/figures';
 import { Difficulty, VICTORY_PHRASES } from '../lib/phrases';
+import { getFigureFindConfig } from '../lib/gameConfig';
 import { saveProgress } from '../lib/storage';
 
 interface FigureFindProps {
@@ -21,7 +22,7 @@ const FigureFind: React.FC<FigureFindProps> = ({ difficulty, onBack }) => {
     const [showHint, setShowHint] = useState(false);
 
     const initGame = useCallback(() => {
-        const config = getFigureDifficultyConfig(difficulty);
+        const config = getFigureFindConfig(difficulty);
         const newFigures: GameFigure[] = [];
 
         // Select a random icon from the theme to be the target

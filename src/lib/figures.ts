@@ -10,7 +10,6 @@ import {
     Leaf, Trees, CloudSun, Shirt, Anchor,
     Fish, Shell, Bone
 } from 'lucide-react';
-import { Difficulty } from './phrases';
 
 export interface FigureTheme {
     id: string;
@@ -64,16 +63,3 @@ export interface GameFigure {
     scale: number;
     isTarget: boolean;
 }
-
-export const getFigureDifficultyConfig = (difficulty: Difficulty) => {
-    switch (difficulty) {
-        case 'FACIL':
-            return { itemCount: 9, gridMode: true, columns: 3 };
-        case 'MEDIO':
-            return { itemCount: 20, gridMode: false, overlap: false };
-        case 'DIFICIL':
-            return { itemCount: 45, gridMode: false, overlap: true };
-        default:
-            return { itemCount: 9, gridMode: true, columns: 3 };
-    }
-};

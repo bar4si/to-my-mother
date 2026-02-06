@@ -1,4 +1,12 @@
-import { Flower, Sun, Sprout, Leaf, TreePine, Coffee, Dessert, Utensils, Bird, Feather, Cloud, Heart, Apple, CakeSlice, ChefHat, Moon, Star, Music, Camera, Pizza, Soup, Candy } from 'lucide-react';
+import {
+    Flower, Sun, Sprout, Leaf, TreePine, Coffee, Dessert, Utensils, Bird, Feather, Cloud, Heart, Apple, CakeSlice, ChefHat, Moon, Star, Music, Camera, Pizza, Soup, Candy, Wind, Droplets, Trees, CloudSun, Bug, Shell, Fish, Bone, Anchor, Globe, Smile, Bell, Clock, Key, Mail, Phone, Gift, Scissors, Image as ImageIcon,
+    Palmtree, Mountain, Waves, Zap, Flame, Snowflake, Umbrella, ShoppingCart,
+    Trash2, Search, Settings, House, ShoppingBag, Truck, Car, Bike, Plane,
+    TrainFront, Bus, Ship, Tractor, MountainSnow, Telescope, Microscope,
+    Book, Pencil, Brush, Music2, Headphones, Radio, Tv, Monitor, Speaker,
+    Dog, Cat, Rabbit, Turtle, Snail, Crown, Diamond, Trophy, Medal, Rocket,
+    Dumbbell, Gamepad2, Guitar, Drum, Piano, Mic, Headphones as HeadphonesIcon
+} from 'lucide-react';
 import React from 'react';
 
 export interface MemoryTheme {
@@ -13,25 +21,65 @@ export const MEMORY_THEMES: MemoryTheme[] = [
         id: 'jardim',
         name: 'Jardim da Vovó',
         description: 'Flores e natureza que acalmam o coração.',
-        icons: [Flower, Sun, Sprout, Leaf, TreePine, Heart, Cloud, Moon]
+        icons: [
+            Flower, Sun, Sprout, Leaf, TreePine, Heart, Cloud, Moon,
+            Bird, Feather, Star, Wind, Droplets, Trees, CloudSun, Bug,
+            Apple, Shell, Fish, Bone, Anchor, Globe, ImageIcon, Smile,
+            Bell, Clock, Key, Mail, Phone, Camera, Music, Gift,
+            Palmtree, Mountain, Waves, Zap, Flame, Snowflake, Umbrella, ShoppingCart,
+            Trash2, Search, Settings, House, ShoppingBag, Truck, Car, Bike, Plane,
+            TrainFront, Bus, Ship, Tractor, MountainSnow, Telescope, Microscope,
+            Book, Pencil, Brush, Music2, Headphones, Radio, Tv, Monitor, Speaker,
+            Dog, Cat, Rabbit, Turtle, Snail, Crown, Diamond, Trophy, Medal, Rocket
+        ]
     },
     {
         id: 'cozinha',
         name: 'Hora do Café',
         description: 'Delícias e utensílios que trazem lembranças doces.',
-        icons: [Coffee, Dessert, Utensils, Apple, CakeSlice, ChefHat, Pizza, Soup]
+        icons: [
+            Coffee, Dessert, Utensils, Apple, CakeSlice, ChefHat, Pizza, Soup,
+            Candy, Coffee, Dessert, Utensils, Apple, CakeSlice, ChefHat, Pizza,
+            Soup, Candy, ShoppingBag, ShoppingCart, Apple, CakeSlice, ChefHat, Pizza,
+            Soup, Candy, Coffee, Dessert, Utensils, Apple, CakeSlice, ChefHat,
+            Dog, Cat, Rabbit, Turtle, Snail, Crown, Diamond, Trophy,
+            Medal, Rocket, Dumbbell, Gamepad2, Guitar, Drum, Piano, Mic,
+            Telescope, Microscope, Book, Pencil, Brush, Music2, HeadphonesIcon, Radio,
+            Tv, Monitor, Speaker, Trash2, Search, Settings, House, ShoppingBag,
+            Apple, CakeSlice, ChefHat, Pizza, Soup, Candy, Coffee, Dessert
+        ]
     },
     {
         id: 'ceu',
         name: 'Olhando o Céu',
         description: 'A beleza do dia e da noite.',
-        icons: [Bird, Feather, Cloud, Moon, Star, Sun, Music, Camera]
+        icons: [
+            Bird, Feather, Cloud, Moon, Star, Sun, Music, Camera,
+            Wind, CloudSun, Cloud, Moon, Star, Sun, Music, Camera,
+            Bird, Feather, Cloud, Moon, Star, Sun, Music, Camera,
+            Wind, CloudSun, Cloud, Moon, Star, Sun, Music, Camera,
+            Palmtree, Mountain, Waves, Zap, Flame, Snowflake, Umbrella, Plane,
+            Cloud, Moon, Star, Sun, Music, Camera, Bird, Feather,
+            Wind, CloudSun, Cloud, Moon, Star, Sun, Music, Camera,
+            Telescope, Microscope, Ship, Plane, TrainFront, Bus, Ship, Tractor,
+            Dog, Cat, Rabbit, Turtle, Snail, Crown, Diamond, Trophy, Medal
+        ]
     },
     {
         id: 'hobbies',
         name: 'Tempo de Lazer',
         description: 'Momentos de alegria e criatividade.',
-        icons: [Music, Camera, Heart, Star, Moon, Flower, Sun, Candy]
+        icons: [
+            Music, Camera, Heart, Star, Moon, Flower, Sun, Candy,
+            ImageIcon, Bell, Clock, Key, Mail, Phone, Gift, Scissors,
+            Music, Camera, Heart, Star, Moon, Flower, Sun, Candy,
+            ImageIcon, Bell, Clock, Key, Mail, Phone, Gift, Scissors,
+            Book, Pencil, Brush, Music2, HeadphonesIcon, Radio, Tv, Monitor, Speaker,
+            Search, Settings, House, ShoppingBag, Truck, Car, Bike, Plane,
+            TrainFront, Bus, Ship, Tractor, MountainSnow, Telescope, Microscope,
+            Bell, Clock, Key, Mail, Phone, Gift, Scissors, ImageIcon,
+            Dog, Cat, Rabbit, Turtle, Snail, Crown, Diamond, Trophy, Medal, Rocket
+        ]
     }
 ];
 

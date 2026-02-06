@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { Sprout, Coffee, Brain, Search, Grid2X2, Star } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Sprout, Coffee, Brain, Search, Grid2X2, Star, Flower2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { GameProgress } from '../lib/storage';
+import { GameProgress, updateCelebratedLevel } from '../lib/storage';
 import { Difficulty } from '../lib/phrases';
 import { getAchievementStatus } from '../lib/achievement';
 
@@ -14,11 +14,13 @@ interface GameMenuProps {
 const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDifficulty }) => {
     const status = getAchievementStatus(progress.score);
     const BadgeIcon = status.currentBadge.icon;
-    const prevLevelRef = useRef(status.currentBadge.level);
 
     // Master Touch: Level-Up Celebration
     useEffect(() => {
-        if (status.currentBadge.level > prevLevelRef.current) {
+        const currentLevel = status.currentBadge.level;
+        const lastCelebrated = progress.lastCelebratedLevel || 1;
+
+        if (currentLevel > lastCelebrated) {
             // Trigger 3 bursts of confetti
             const duration = 3 * 1000;
             const animationEnd = Date.now() + duration;
@@ -35,7 +37,6 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
 
                 const particleCount = 50 * (timeLeft / duration);
 
-                // Since particles fall down, start a bit higher than random
                 confetti({
                     ...defaults,
                     particleCount,
@@ -48,9 +49,10 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                 });
             }, 250);
 
-            prevLevelRef.current = status.currentBadge.level;
+            // Persist that we celebrated this level
+            updateCelebratedLevel(currentLevel);
         }
-    }, [status.currentBadge.level]);
+    }, [status.currentBadge.level, progress.lastCelebratedLevel]);
 
     const games = [
         {
@@ -66,6 +68,13 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
             description: 'Exercite sua mente combinando figuras nostálgicas.',
             icon: Grid2X2,
             color: 'bg-blue-100 text-blue-600'
+        },
+        {
+            id: 'hangman',
+            name: 'Forca das Flores',
+            description: 'Adivinhe a palavra para manter a árvore florida.',
+            icon: Flower2,
+            color: 'bg-pink-100 text-pink-600'
         }
     ];
 
@@ -96,7 +105,12 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                         </div>
 
                         <div className="flex-1">
-                            <span className="text-[10px] uppercase tracking-[0.2em] font-black text-primary/60 mb-1 block">Sua Conquista</span>
+                            <div className="flex items-center gap-2 mb-1">
+                                <span className="text-[10px] uppercase tracking-[0.2em] font-black text-primary/60 block">Sua Conquista</span>
+                                <span className="px-2 py-0.5 bg-primary/10 text-primary text-[9px] font-black rounded-full border border-primary/20">
+                                    NÍVEL {status.currentBadge.level}
+                                </span>
+                            </div>
                             <h2 className="text-2xl font-black text-slate-900 leading-tight">
                                 {status.currentBadge.title}
                             </h2>
@@ -162,7 +176,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
 
             {/* Games List */}
             <div className="flex flex-col gap-4">
-                <h3 className="text-sm font-black text-slate-600 uppercase tracking-widest px-4">Escolha seu Jogo</h3>
+                {/* <h3 className="text-sm font-black text-slate-600 uppercase tracking-widest px-4">Escolha seu Jogo</h3> */}
                 {games.map((game) => {
                     const GameIcon = game.icon;
                     return (
