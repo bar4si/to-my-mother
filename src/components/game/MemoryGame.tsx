@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
-import { MEMORY_THEMES, MemoryCard, generateCards, MemoryTheme } from '../lib/memory';
-import { saveProgress } from '../lib/storage';
-import { getMemoryGameConfig } from '../lib/gameConfig';
-import { VICTORY_PHRASES, Difficulty } from '../lib/phrases';
+import { MEMORY_THEMES, MemoryCard, generateCards, MemoryTheme } from '../../lib/memory';
+import { saveProgress } from '../../lib/storage';
+import { getMemoryGameConfig } from '../../lib/gameConfig';
+import { VICTORY_PHRASES, Difficulty } from '../../lib/phrases';
 
 interface MemoryGameProps {
     difficulty: Difficulty;

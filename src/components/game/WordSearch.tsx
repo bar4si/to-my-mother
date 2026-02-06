@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CATEGORIES, VICTORY_PHRASES, Difficulty, WordCategory } from '../lib/phrases';
-import { saveProgress } from '../lib/storage';
-import { getWordSearchConfig } from '../lib/gameConfig';
+import { CATEGORIES, VICTORY_PHRASES, Difficulty, WordCategory } from '../../lib/phrases';
+import { saveProgress } from '../../lib/storage';
+import { getWordSearchConfig } from '../../lib/gameConfig';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
 

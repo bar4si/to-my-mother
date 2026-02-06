@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FIGURE_THEMES, FigureTheme, GameFigure } from '../lib/figures';
+import { FIGURE_THEMES, FigureTheme, GameFigure } from '../../lib/figures';
 import { RotateCcw, Lightbulb } from 'lucide-react';
-import { Difficulty, VICTORY_PHRASES } from '../lib/phrases';
-import { getFigureFindConfig } from '../lib/gameConfig';
-import { saveProgress } from '../lib/storage';
+import { Difficulty, VICTORY_PHRASES } from '../../lib/phrases';
+import { getFigureFindConfig } from '../../lib/gameConfig';
+import { saveProgress } from '../../lib/storage';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
 

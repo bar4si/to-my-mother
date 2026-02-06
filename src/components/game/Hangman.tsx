@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, Star, Lightbulb, Flower2 } from 'lucide-react';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
-import { HANGMAN_CATEGORIES, getRandomCategory, getRandomWord, HangmanCategory } from '../lib/hangman';
-import { saveProgress } from '../lib/storage';
-import { getHangmanConfig } from '../lib/gameConfig';
-import { VICTORY_PHRASES, Difficulty } from '../lib/phrases';
+import { HANGMAN_CATEGORIES, getRandomCategory, getRandomWord, HangmanCategory } from '../../lib/hangman';
+import { saveProgress } from '../../lib/storage';
+import { getHangmanConfig } from '../../lib/gameConfig';
+import { VICTORY_PHRASES, Difficulty } from '../../lib/phrases';
 
 interface HangmanProps {
     difficulty: Difficulty;
