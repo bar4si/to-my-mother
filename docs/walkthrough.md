@@ -10,11 +10,14 @@ O projeto "to-my-mother" já está preparado para publicação automática.
 - [x] **Contraste Aprimorado**: Cores do tema ajustadas para máxima legibilidade (fundo branco puro e textos em tons de slate escuro).
 - [x] **Acessibilidade Visível**: Aumentado o peso das fontes e a clareza dos botões no menu principal e no jogo de caça-palavras.
 - [x] **Caça-Palavras Gigante**: Grid travado em 8x8 com letras em tamanho `text-3xl`. O tabuleiro agora expande até as bordas da tela no celular, aproveitando 100% do espaço disponível.
-- [x] **Dificuldade Visual**: Menu de seleção de nível agora utiliza ícones lúdicos e coloridos (Brotinho, Café, Cérebro) em formato de cards grandes, tornando a escolha mais tátil e intuitiva.
-- [x] **Menu Refinado**:
-    - **Ícones Vetoriais**: Substituição de emojis por ícones Lucide (`Search`, `Grid2X2`) para alinhamento milimétrico.
-    - **Tamanho Fixo**: Botões de jogo com altura padronizada (`h-32`) para evitar pulos de layout e facilitar o toque.
-    - **Alinhamento Premium**: Conteúdo dos cards alinhado à esquerda para leitura fluída, com centralização vertical para um acabamento profissional.
+- [x] **Mural de Conquistas Afetivas**: 
+    - **15 Insígnias**: Uma jornada poética desde "Doutora em Carinho" até "Lenda do Amor Infinito".
+    - **Barra de Progresso**: Feedback visual imediato do avanço cognitivo.
+    - **Sistema 10.000+**: Progressão infinita com estrelas de prestígio, garantindo que o jogo continue recompensador para sempre.
+- [x] **Painel de Controle Unificado**:
+    - **Integração Inteligente**: Seletor de dificuldade movido para dentro do Mural de Conquistas, centralizando todas as configurações e progressos em um só lugar.
+    - **UX para Idosos**: Botões de nível agora são horizontais e compactos, mas preservam uma área de toque ampla e ícones claros.
+    - **Feedback Dinâmico**: O botão do nível selecionado agora possui uma animação sutil (bounce) e cor de destaque, facilitando a identificação visual.
 - [x] **PWA e Metadados**: Pasta `public` criada, manifesto configurado e ícone SVG adicionado para suporte completo a PWA.
 - [x] **Remoção de Placeholders**: Removido o jogo da memória ("Em breve") do menu e da documentação para focar na experiência atual.
 

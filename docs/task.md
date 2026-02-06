@@ -49,3 +49,14 @@
     - [x] Fix uniform button size (h-32) and vertical alignment
     - [x] Remove redundant level indicators
     - [x] Run build and verify
+- [x] Implement Motivation & Progress System
+    - [x] Create implementation plan (15 Affective Badges + Infinite 10k+)
+    - [x] Create achievement.ts logic with prestige system
+    - [x] Update GameMenu.tsx with visual badges and progression mural
+    - [x] Add achievement animations and pulsing feedback
+    - [x] Verify build and progression
+- [x] Refine Game Menu Layout (Integrated Control Center)
+    - [x] Create implementation plan for integrated card
+    - [x] Merge difficulty selector into achievement mural
+    - [x] Optimize hit targets for senior UX
+    - [x] Run build and verify
