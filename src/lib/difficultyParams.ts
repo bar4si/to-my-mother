@@ -1,5 +1,5 @@
 import { Difficulty } from './phrases';
-import { WordSearchConfig, MemoryGameConfig, FigureFindConfig, HangmanConfig } from './gameConfig';
+import { WordSearchConfig, MemoryGameConfig, FigureFindConfig, HangmanConfig, MatchThreeConfig } from './gameConfig';
 
 export const WORD_SEARCH_DIFFICULTIES: Record<Difficulty, WordSearchConfig> = {
     FACIL: {
@@ -98,5 +98,29 @@ export const HANGMAN_DIFFICULTIES: Record<Difficulty, HangmanConfig> = {
         wordMinLength: 8,
         wordMaxLength: 12,
         allowHints: true // Permitir dicas sempre, mas com chance reduzida de aparecer automático
+    }
+};
+
+export const MATCH_THREE_DIFFICULTIES: Record<Difficulty, MatchThreeConfig> = {
+    FACIL: {
+        rows: 6,
+        cols: 6,
+        moves: 20,
+        targetScore: 300,
+        itemTypes: 4
+    },
+    MEDIO: {
+        rows: 7,
+        cols: 7,
+        moves: 15,
+        targetScore: 500,
+        itemTypes: 5
+    },
+    DIFICIL: {
+        rows: 8,
+        cols: 8,
+        moves: 12,
+        targetScore: 800,
+        itemTypes: 6
     }
 };

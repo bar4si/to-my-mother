@@ -3,7 +3,8 @@ import {
     WORD_SEARCH_DIFFICULTIES,
     MEMORY_GAME_DIFFICULTIES,
     FIGURE_FIND_DIFFICULTIES,
-    HANGMAN_DIFFICULTIES
+    HANGMAN_DIFFICULTIES,
+    MATCH_THREE_DIFFICULTIES
 } from './difficultyParams';
 
 export interface WordSearchConfig {
@@ -40,6 +41,14 @@ export interface HangmanConfig {
     allowHints: boolean;
 }
 
+export interface MatchThreeConfig {
+    rows: number;
+    cols: number;
+    moves: number;
+    targetScore: number;
+    itemTypes: number; // Quantidade de tipos de itens diferentes
+}
+
 /**
  * Get the specific config for a game based on difficulty
  */
@@ -47,3 +56,4 @@ export const getWordSearchConfig = (difficulty: Difficulty) => WORD_SEARCH_DIFFI
 export const getMemoryGameConfig = (difficulty: Difficulty) => MEMORY_GAME_DIFFICULTIES[difficulty];
 export const getFigureFindConfig = (difficulty: Difficulty) => FIGURE_FIND_DIFFICULTIES[difficulty];
 export const getHangmanConfig = (difficulty: Difficulty) => HANGMAN_DIFFICULTIES[difficulty];
+export const getMatchThreeConfig = (difficulty: Difficulty) => MATCH_THREE_DIFFICULTIES[difficulty];

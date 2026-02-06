@@ -4,6 +4,7 @@ import WordSearch from './components/game/WordSearch'
 import MemoryGame from './components/game/MemoryGame'
 import Hangman from './components/game/Hangman'
 import FigureFind from './components/game/FigureFind'
+import MatchThree from './components/game/MatchThree'
 import GameMenu from './components/features/GameMenu'
 import { GameProvider } from './contexts/GameContext'
 
@@ -22,6 +23,7 @@ function AppContent() {
                     <Route path="/game/memory-game" element={<MemoryGame />} />
                     <Route path="/game/hangman" element={<Hangman />} />
                     <Route path="/game/figure-find" element={<FigureFind />} />
+                    <Route path="/game/match-three" element={<MatchThree />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </motion.main>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Grid2X2, Star, Flower2, Image } from 'lucide-react';
+import { Search, Grid2X2, Star, Flower2, Image, Grid } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useGame } from '../../contexts/GameContext';
 import { getAchievementStatus } from '../../lib/achievement';
@@ -82,6 +82,14 @@ const GameMenu: React.FC = () => {
             icon: Image,
             color: 'bg-orange-100 text-orange-600',
             path: '/game/figure-find'
+        },
+        {
+            id: 'match-three',
+            name: 'Combinando Lembranças',
+            description: 'Combine itens iguais para despertar memórias felizes.',
+            icon: Grid,
+            color: 'bg-indigo-100 text-indigo-600',
+            path: '/game/match-three'
         }
     ];
 
