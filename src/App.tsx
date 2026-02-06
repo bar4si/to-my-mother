@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import WordSearch from './components/WordSearch'
 import MemoryGame from './components/MemoryGame'
 import GameMenu from './components/GameMenu'
@@ -28,41 +29,85 @@ function App() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-4">
-            <header className="mb-6 text-center">
-                <h1 className="mb-1 text-4xl font-black text-primary">Para Mamãe</h1>
-                <p className="text-slate-700 italic font-bold">Momentos de alegria e diversão</p>
-            </header>
-
-            <main className="w-full max-w-md bg-white rounded-[48px] shadow-2xl overflow-hidden p-8 border border-accent">
-                {currentGame === 'wordsearch' && progress.preferredDifficulty ? (
-                    <WordSearch
-                        difficulty={progress.preferredDifficulty}
-                        onBack={() => {
-                            setCurrentGame(null);
-                            refreshProgress();
-                        }}
-                    />
-                ) : currentGame === 'memory' && progress.preferredDifficulty ? (
-                    <MemoryGame
-                        difficulty={progress.preferredDifficulty}
-                        onBack={() => {
-                            setCurrentGame(null);
-                            refreshProgress();
-                        }}
-                    />
-                ) : (
-                    <GameMenu
-                        progress={progress}
-                        onSelectGame={handleSelectGame}
-                        onSetDifficulty={handleSetDifficulty}
-                    />
+        <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-slate-50">
+            <AnimatePresence mode="wait">
+                {!currentGame && (
+                    <motion.header
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="mb-6 text-center"
+                    >
+                        <h1 className="mb-1 text-4xl font-black text-primary">Para Mamãe</h1>
+                        <p className="text-slate-700 italic font-bold">Momentos de alegria e diversão</p>
+                    </motion.header>
                 )}
-            </main>
+            </AnimatePresence>
 
-            <footer className="mt-10 text-[10px] opacity-40 uppercase tracking-[0.2em] font-black text-slate-500">
-                Criado com todo amor do mundo • 2026
-            </footer>
+            <motion.main
+                layout
+                className="w-full max-w-md bg-white rounded-[48px] shadow-2xl overflow-hidden p-8 border border-accent relative"
+            >
+                <AnimatePresence mode="wait">
+                    {currentGame === 'wordsearch' && progress.preferredDifficulty ? (
+                        <motion.div
+                            key="wordsearch"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                        >
+                            <WordSearch
+                                difficulty={progress.preferredDifficulty}
+                                onBack={() => {
+                                    setCurrentGame(null);
+                                    refreshProgress();
+                                }}
+                            />
+                        </motion.div>
+                    ) : currentGame === 'memory' && progress.preferredDifficulty ? (
+                        <motion.div
+                            key="memory"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                        >
+                            <MemoryGame
+                                difficulty={progress.preferredDifficulty}
+                                onBack={() => {
+                                    setCurrentGame(null);
+                                    refreshProgress();
+                                }}
+                            />
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="menu"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                        >
+                            <GameMenu
+                                progress={progress}
+                                onSelectGame={handleSelectGame}
+                                onSetDifficulty={handleSetDifficulty}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.main>
+
+            <AnimatePresence>
+                {!currentGame && (
+                    <motion.footer
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.4 }}
+                        exit={{ opacity: 0 }}
+                        className="mt-10 text-[10px] uppercase tracking-[0.2em] font-black text-slate-500"
+                    >
+                        Criado com todo amor do mundo • 2026
+                    </motion.footer>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

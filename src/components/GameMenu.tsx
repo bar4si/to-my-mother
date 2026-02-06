@@ -56,16 +56,16 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
         {
             id: 'wordsearch',
             name: 'Caça-Palavras',
-            description: 'Encontre as palavras escondidas!',
+            description: 'Encontre palavras escondidas e treine seu olhar.',
             icon: Search,
-            color: 'bg-blue-100 text-blue-600'
+            color: 'bg-emerald-100 text-emerald-600'
         },
         {
             id: 'memory',
             name: 'Jogo da Memória',
-            description: 'Encontre o par de cada figura!',
+            description: 'Exercite sua mente combinando figuras nostálgicas.',
             icon: Grid2X2,
-            color: 'bg-rose-100 text-rose-600'
+            color: 'bg-blue-100 text-blue-600'
         }
     ];
 

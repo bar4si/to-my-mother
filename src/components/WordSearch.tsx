@@ -42,54 +42,65 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
         // Determin words per game based on difficulty
         const wordsPerGame = difficulty === 'FACIL' ? 4 : difficulty === 'MEDIO' ? 5 : 6;
 
-        // Pick words that fit in current grid size (max length 8)
+        // Pick words that fit in current grid size
         const validWords = currentCategory.words.filter(w => w.length <= GRID_SIZE);
         const wordPool = [...validWords].sort(() => Math.random() - 0.5);
-        const selectedWords = wordPool.slice(0, wordsPerGame);
-        setActiveWords(selectedWords);
 
         const newGrid: string[][] = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(''));
+        const placedWords: string[] = [];
 
-        // Place words
-        selectedWords.forEach(word => {
+        // Try to place words from the pool until we reach wordsPerGame or run out of pool
+        for (const wordPoolItem of wordPool) {
+            if (placedWords.length >= wordsPerGame) break;
+
             let placed = false;
             let attempts = 0;
+
+            // For Expert, words can be reversed
+            const shouldReverse = difficulty === 'DIFICIL' && Math.random() > 0.5;
+            const wordToPlace = shouldReverse ? wordPoolItem.split('').reverse().join('') : wordPoolItem;
+
             while (!placed && attempts < 100) {
                 attempts++;
                 const isHorizontal = Math.random() > 0.5;
-                const isDiagonal = difficulty === 'DIFICIL' && Math.random() > 0.7;
+                const isDiagonal = difficulty === 'DIFICIL' && Math.random() > 0.5;
 
                 let dir = isHorizontal ? 'H' : 'V';
                 if (isDiagonal) dir = 'D';
 
-                const rowLimit = dir === 'H' ? GRID_SIZE : GRID_SIZE - word.length + 1;
-                const colLimit = dir === 'V' ? GRID_SIZE : GRID_SIZE - word.length + 1;
+                const rowLimit = dir === 'H' ? GRID_SIZE : GRID_SIZE - wordToPlace.length + 1;
+                const colLimit = dir === 'V' ? GRID_SIZE : GRID_SIZE - wordToPlace.length + 1;
+
+                if (rowLimit <= 0 || colLimit <= 0) continue;
 
                 const row = Math.floor(Math.random() * rowLimit);
                 const col = Math.floor(Math.random() * colLimit);
 
-                // Check if fits
+                // Check if fits (including overlapping same characters)
                 let fits = true;
-                for (let i = 0; i < word.length; i++) {
+                for (let i = 0; i < wordToPlace.length; i++) {
                     const r = dir === 'V' ? row + i : dir === 'D' ? row + i : row;
                     const c = dir === 'H' ? col + i : dir === 'D' ? col + i : col;
 
-                    if (r >= GRID_SIZE || c >= GRID_SIZE || (newGrid[r][c] !== '' && newGrid[r][c] !== word[i])) {
+                    if (r >= GRID_SIZE || c >= GRID_SIZE || (newGrid[r][c] !== '' && newGrid[r][c] !== wordToPlace[i])) {
                         fits = false;
                         break;
                     }
                 }
 
                 if (fits) {
-                    for (let i = 0; i < word.length; i++) {
+                    for (let i = 0; i < wordToPlace.length; i++) {
                         const r = dir === 'V' ? row + i : dir === 'D' ? row + i : row;
                         const c = dir === 'H' ? col + i : dir === 'D' ? col + i : col;
-                        newGrid[r][c] = word[i];
+                        newGrid[r][c] = wordToPlace[i];
                     }
                     placed = true;
+                    placedWords.push(wordPoolItem);
                 }
             }
-        });
+        }
+
+        setActiveWords(placedWords);
 
         // Fill empty
         const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -238,14 +249,14 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                 )))}
             </div>
 
-            {/* Simplified Word List */}
-            <div className="flex flex-wrap gap-2 justify-center py-2 px-2">
+            {/* Refined Word List for better readability */}
+            <div className="flex flex-wrap gap-3 justify-center py-4 px-2">
                 {activeWords.map((word: string) => (
                     <span
                         key={word}
-                        className={`px-4 py-2 rounded-2xl text-xs font-black border-2 transition-all ${foundWords.includes(word)
-                            ? 'bg-green-100 text-green-900 border-green-500/30 line-through opacity-40'
-                            : 'bg-white text-slate-900 border-slate-200 shadow-md ring-2 ring-slate-50'
+                        className={`px-5 py-2.5 rounded-2xl text-base font-bold border transition-all ${foundWords.includes(word)
+                            ? 'bg-green-50 text-green-700 border-green-200 line-through opacity-50'
+                            : 'bg-white text-slate-800 border-slate-200 shadow-sm'
                             }`}
                     >
                         {word}
