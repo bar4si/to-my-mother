@@ -17,21 +17,13 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
             description: 'Encontre as palavras escondidas!',
             icon: '🔍',
             color: 'bg-blue-100 text-blue-600'
-        },
-        {
-            id: 'memory',
-            name: 'Jogo da Memória',
-            description: 'Em breve...',
-            icon: '🧠',
-            color: 'bg-slate-100 text-slate-400',
-            disabled: true
         }
     ];
 
     const difficultyConfig = [
-        { id: 'FACIL', label: 'Iniciante', color: 'bg-green-100 text-green-700' },
-        { id: 'MEDIO', label: 'Médio', color: 'bg-blue-100 text-blue-700' },
-        { id: 'DIFICIL', label: 'Especialista', color: 'bg-purple-100 text-purple-700' },
+        { id: 'FACIL', label: 'Iniciante', color: 'bg-green-100 text-green-900' },
+        { id: 'MEDIO', label: 'Médio', color: 'bg-blue-100 text-blue-900' },
+        { id: 'DIFICIL', label: 'Especialista', color: 'bg-purple-100 text-purple-900' },
     ];
 
     return (
@@ -43,13 +35,13 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                         🏆
                     </div>
                     <div>
-                        <span className="text-xs uppercase tracking-wider font-bold text-primary opacity-60">Sua Pontuação</span>
-                        <p className="text-2xl font-black text-primary">{progress.score}</p>
+                        <span className="text-xs uppercase tracking-wider font-extrabold text-primary">Sua Pontuação</span>
+                        <p className="text-3xl font-black text-primary">{progress.score}</p>
                     </div>
                 </div>
                 <div className="text-right">
-                    <span className="text-xs uppercase tracking-wider font-bold text-primary opacity-60">Nível</span>
-                    <p className="font-bold text-primary">
+                    <span className="text-xs uppercase tracking-wider font-extrabold text-primary">Nível</span>
+                    <p className="font-black text-primary">
                         {progress.preferredDifficulty || 'Nenhum'}
                     </p>
                 </div>
@@ -57,15 +49,15 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
 
             {/* Difficulty Selector */}
             <div className="flex flex-col gap-3">
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Configurar Nível</h3>
+                <h3 className="text-sm font-black text-slate-600 uppercase tracking-widest px-2">Configurar Nível</h3>
                 <div className="grid grid-cols-3 gap-2">
                     {difficultyConfig.map((config) => (
                         <button
                             key={config.id}
                             onClick={() => onSetDifficulty(config.id as Difficulty)}
                             className={`p-3 rounded-2xl text-xs font-black transition-all border-2 ${progress.preferredDifficulty === config.id
-                                ? `${config.color} border-current shadow-sm scale-105`
-                                : 'bg-white border-slate-100 text-slate-400 opacity-60'
+                                ? `${config.color} border-primary shadow-md scale-105`
+                                : 'bg-white border-slate-200 text-slate-600'
                                 }`}
                         >
                             {config.label}
@@ -76,25 +68,23 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
 
             {/* Games List */}
             <div className="flex flex-col gap-4">
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Escolha seu Jogo</h3>
+                <h3 className="text-sm font-black text-slate-600 uppercase tracking-widest px-2">Escolha seu Jogo</h3>
                 {games.map((game) => (
                     <button
                         key={game.id}
-                        disabled={game.disabled}
                         onClick={() => onSelectGame(game.id)}
-                        className={`hit-target w-full rounded-3xl p-5 flex items-center justify-between transition-all active:scale-95 ${game.disabled ? 'opacity-50 grayscale' : 'bg-white shadow-md border border-slate-100 hover:shadow-lg'
-                            }`}
+                        className="hit-target w-full rounded-3xl p-5 flex items-center justify-between transition-all active:scale-95 bg-white shadow-md border border-slate-100 hover:shadow-lg"
                     >
                         <div className="flex items-center gap-5">
                             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl ${game.color}`}>
                                 {game.icon}
                             </div>
                             <div className="text-left">
-                                <h4 className="text-lg font-bold text-slate-800">{game.name}</h4>
-                                <p className="text-sm text-slate-500 font-medium">{game.description}</p>
+                                <h4 className="text-xl font-black text-slate-900">{game.name}</h4>
+                                <p className="text-sm text-slate-700 font-bold">{game.description}</p>
                             </div>
                         </div>
-                        {!game.disabled && <ChevronRight className="w-6 h-6 text-slate-300" />}
+                        <ChevronRight className="w-6 h-6 text-slate-300" />
                     </button>
                 ))}
             </div>

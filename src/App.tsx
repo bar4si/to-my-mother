@@ -30,7 +30,7 @@ function App() {
         <div className="min-h-screen flex flex-col items-center justify-center p-4">
             <header className="mb-6 text-center">
                 <h1 className="mb-1 text-4xl font-black text-primary">Para Mamãe</h1>
-                <p className="text-slate-500 italic font-medium">Momentos de alegria e diversão</p>
+                <p className="text-slate-700 italic font-bold">Momentos de alegria e diversão</p>
             </header>
 
             <main className="w-full max-w-md bg-white rounded-[48px] shadow-2xl overflow-hidden p-8 border border-accent">

@@ -21,7 +21,6 @@ Uma suíte de jogos nostálgicos e acessíveis, criada com todo o carinho para m
 
 ## 🕹️ Jogos Disponíveis
 - **🔍 Caça-Palavras**: Mais de 50.000 combinações únicas em três níveis.
-- **🧠 Jogo da Memória**: *Em Breve!*
 
 ## 🛠️ Tecnologias
 

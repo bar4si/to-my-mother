@@ -185,21 +185,21 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
 
     return (
         <div className="flex flex-col gap-5">
-            <div className="flex justify-between items-center bg-slate-50 -mx-6 -mt-6 p-4 border-b border-accent mb-2">
-                <button onClick={onBack} className="p-2 bg-white rounded-full shadow-sm">
-                    <ChevronLeft className="w-5 h-5 text-slate-500" />
+            <div className="flex justify-between items-center bg-slate-100 -mx-8 -mt-8 p-6 border-b-2 border-slate-200 mb-2">
+                <button onClick={onBack} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
+                    <ChevronLeft className="w-6 h-6 text-primary" />
                 </button>
                 <div className="text-center">
-                    <h2 className="text-lg font-bold text-primary leading-tight">{currentCategory.name}</h2>
-                    <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">{difficulty}</span>
+                    <h2 className="text-xl font-black text-primary leading-tight uppercase tracking-tight">{currentCategory.name}</h2>
+                    <span className="text-xs uppercase tracking-[0.2em] text-slate-600 font-extrabold">{difficulty}</span>
                 </div>
-                <button onClick={initGame} className="p-2 bg-white rounded-full shadow-sm">
-                    <RotateCcw className="w-5 h-5 text-slate-500" />
+                <button onClick={initGame} className="hit-target p-2 bg-white rounded-2xl shadow-md border border-slate-200 active:scale-95 transition-all">
+                    <RotateCcw className="w-6 h-6 text-primary" />
                 </button>
             </div>
 
             <div
-                className="grid grid-cols-10 gap-1 bg-slate-100 p-1.5 rounded-2xl shadow-inner select-none touch-none"
+                className="grid grid-cols-10 gap-1.5 bg-slate-200 p-2 rounded-[32px] shadow-inner select-none touch-none border-4 border-white"
                 onMouseMove={handleTouchMove}
                 onMouseUp={handleTouchEnd}
                 onTouchMove={handleTouchMove}
@@ -214,12 +214,12 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                         onTouchStart={() => handleTouchStart(cell)}
                         className={`
               w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center 
-              text-lg font-bold rounded-lg transition-all
+              text-xl font-black rounded-xl transition-all
               ${isSelected(r, c)
-                                ? 'bg-primary text-white scale-110 z-10'
+                                ? 'bg-primary text-white scale-110 z-10 shadow-lg'
                                 : isCellFound(r, c)
-                                    ? 'bg-blue-500/20 text-blue-700'
-                                    : 'bg-white text-slate-700'
+                                    ? 'bg-blue-600/30 text-blue-900 ring-2 ring-blue-500/20'
+                                    : 'bg-white text-slate-900 border border-slate-100 shadow-sm'
                             }
               cursor-pointer active:scale-95
             `}
@@ -229,13 +229,13 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                 )))}
             </div>
 
-            <div className="flex flex-wrap gap-2 justify-center">
+            <div className="flex flex-wrap gap-2 justify-center py-2">
                 {activeWords.map((word: string) => (
                     <span
                         key={word}
-                        className={`px-4 py-1.5 rounded-xl text-xs font-bold border transition-all ${foundWords.includes(word)
-                            ? 'bg-green-100 text-green-700 border-green-200 line-through scale-95 opacity-60'
-                            : 'bg-white text-slate-600 border-slate-200 shadow-sm'
+                        className={`px-4 py-2 rounded-2xl text-xs font-black border-2 transition-all ${foundWords.includes(word)
+                            ? 'bg-green-100 text-green-900 border-green-500/30 line-through scale-95 opacity-50 font-bold'
+                            : 'bg-white text-slate-900 border-slate-200 shadow-md scale-100'
                             }`}
                     >
                         {word}
@@ -253,29 +253,29 @@ const WordSearch: React.FC<WordSearchProps> = ({ difficulty, onBack }) => {
                         <motion.div
                             initial={{ scale: 0.9, y: 20 }}
                             animate={{ scale: 1, y: 0 }}
-                            className="bg-white p-8 rounded-[40px] shadow-2xl text-center flex flex-col items-center gap-6 max-w-[320px] w-full"
+                            className="bg-white p-10 rounded-[48px] shadow-2xl text-center flex flex-col items-center gap-6 max-w-[360px] w-full border border-slate-100"
                         >
-                            <div className="w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center text-5xl shadow-lg border-4 border-white">
+                            <div className="w-28 h-28 bg-yellow-400 rounded-[32px] flex items-center justify-center text-6xl shadow-xl border-4 border-white rotate-3">
                                 🏆
                             </div>
                             <div>
-                                <h3 className="text-2xl font-black text-slate-800 mb-2">Incrível!</h3>
-                                <p className="text-lg text-slate-600 italic font-medium">"{victoryMessage}"</p>
+                                <h3 className="text-3xl font-black text-slate-900 mb-2 tracking-tight">Incrível!</h3>
+                                <p className="text-xl text-slate-700 italic font-bold max-w-[240px]">"{victoryMessage}"</p>
                             </div>
-                            <div className="w-full flex flex-col gap-3">
+                            <div className="w-full flex flex-col gap-4">
                                 <button
                                     onClick={() => {
                                         const next = availableCategories[Math.floor(Math.random() * availableCategories.length)];
                                         setCurrentCategory(next);
                                         initGame();
                                     }}
-                                    className="hit-target bg-primary text-white w-full rounded-2xl font-bold text-lg shadow-md"
+                                    className="hit-target bg-primary text-white w-full rounded-[24px] font-black text-xl shadow-xl hover:scale-105 active:scale-95 transition-all"
                                 >
-                                    Próximo Nível
+                                    Próximo Jogo
                                 </button>
                                 <button
                                     onClick={onBack}
-                                    className="text-slate-400 font-bold text-sm hover:text-slate-600"
+                                    className="text-slate-500 font-black text-sm hover:text-primary uppercase tracking-widest transition-colors"
                                 >
                                     Voltar ao Início
                                 </button>

@@ -7,15 +7,15 @@ export default {
     theme: {
         extend: {
             colors: {
-                background: '#fdfbf7', // Creme suave
-                foreground: '#0f172a', // Azul Marinho profundo
+                background: '#ffffff', // Branco puro para máximo contraste
+                foreground: '#020617', // Slate 950 (quase preto)
                 primary: {
-                    DEFAULT: '#1e293b',
-                    foreground: '#f8fafc',
+                    DEFAULT: '#0f172a', // Slate 900
+                    foreground: '#ffffff',
                 },
                 accent: {
-                    DEFAULT: '#f1f5f9',
-                    foreground: '#1e293b',
+                    DEFAULT: '#f8fafc', // Slate 50
+                    foreground: '#0f172a',
                 },
             },
         },

@@ -16,12 +16,8 @@ A nostalgic and accessible game suite designed with love for my mother (born in 
   - High contrast (7:1 ratio) for better visibility.
   - Large hit targets (60px) for easy interaction.
   - Straight-line selection lock to help with motor precision.
-- **PWA Support**: Works 100% offline once installed. Perfect for playing on a tablet or phone without needing internet.
-- **Progress Tracking**: Automatic saving of high scores and preferred difficulty settings.
-
 ## 🕹️ Games Included
 - **🔍 Word Search**: Over 50,000 unique combinations across three difficulty levels.
-- **🧠 Memory Game**: *Coming Soon!*
 
 ## 🛠️ Tech Stack
 
