@@ -1,5 +1,4 @@
-import React from 'react';
-import { ChevronRight } from 'lucide-react';
+import { Sprout, Coffee, Brain, Search, Grid2X2 } from 'lucide-react';
 import { GameProgress } from '../lib/storage';
 import { Difficulty } from '../lib/phrases';
 
@@ -15,22 +14,22 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
             id: 'wordsearch',
             name: 'Caça-Palavras',
             description: 'Encontre as palavras escondidas!',
-            icon: '🔍',
+            icon: Search,
             color: 'bg-blue-100 text-blue-600'
         },
         {
             id: 'memory',
             name: 'Jogo da Memória',
             description: 'Encontre o par de cada figura!',
-            icon: '🧠',
+            icon: Grid2X2,
             color: 'bg-rose-100 text-rose-600'
         }
     ];
 
     const difficultyConfig = [
-        { id: 'FACIL', label: 'Iniciante', color: 'bg-green-100 text-green-900' },
-        { id: 'MEDIO', label: 'Médio', color: 'bg-blue-100 text-blue-900' },
-        { id: 'DIFICIL', label: 'Especialista', color: 'bg-purple-100 text-purple-900' },
+        { id: 'FACIL', label: 'Iniciante', icon: Sprout, color: 'bg-green-100 text-green-900' },
+        { id: 'MEDIO', label: 'Médio', icon: Coffee, color: 'bg-blue-100 text-blue-900' },
+        { id: 'DIFICIL', label: 'Especialista', icon: Brain, color: 'bg-purple-100 text-purple-900' },
     ];
 
     return (
@@ -46,54 +45,57 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                         <p className="text-3xl font-black text-primary">{progress.score}</p>
                     </div>
                 </div>
-                <div className="text-right">
-                    <span className="text-xs uppercase tracking-wider font-extrabold text-primary">Nível</span>
-                    <p className="font-black text-primary">
-                        {progress.preferredDifficulty || 'Nenhum'}
-                    </p>
-                </div>
             </div>
 
             {/* Difficulty Selector */}
             <div className="flex flex-col gap-3">
                 <h3 className="text-sm font-black text-slate-600 uppercase tracking-widest px-2">Configurar Nível</h3>
-                <div className="grid grid-cols-3 gap-2">
-                    {difficultyConfig.map((config) => (
-                        <button
-                            key={config.id}
-                            onClick={() => onSetDifficulty(config.id as Difficulty)}
-                            className={`p-3 rounded-2xl text-xs font-black transition-all border-2 ${progress.preferredDifficulty === config.id
-                                ? `${config.color} border-primary shadow-md scale-105`
-                                : 'bg-white border-slate-200 text-slate-600'
-                                }`}
-                        >
-                            {config.label}
-                        </button>
-                    ))}
+                <div className="grid grid-cols-3 gap-3">
+                    {difficultyConfig.map((config) => {
+                        const Icon = config.icon;
+                        const isSelected = progress.preferredDifficulty === config.id;
+                        return (
+                            <button
+                                key={config.id}
+                                onClick={() => onSetDifficulty(config.id as Difficulty)}
+                                className={`flex flex-col items-center gap-2 p-4 rounded-[32px] transition-all border-4 active:scale-95 ${isSelected
+                                    ? `${config.color} border-slate-900 shadow-xl -translate-y-1`
+                                    : 'bg-white border-slate-100 text-slate-400 opacity-60'
+                                    }`}
+                            >
+                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${isSelected ? 'bg-white shadow-sm' : 'bg-slate-50'}`}>
+                                    <Icon className={`w-8 h-8 ${isSelected ? 'text-slate-900' : 'text-slate-300'}`} strokeWidth={3} />
+                                </div>
+                                <span className={`text-xs font-black uppercase tracking-tight ${isSelected ? 'text-slate-900' : 'text-slate-400'}`}>
+                                    {config.label}
+                                </span>
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
 
             {/* Games List */}
             <div className="flex flex-col gap-4">
                 <h3 className="text-sm font-black text-slate-600 uppercase tracking-widest px-2">Escolha seu Jogo</h3>
-                {games.map((game) => (
-                    <button
-                        key={game.id}
-                        onClick={() => onSelectGame(game.id)}
-                        className="hit-target w-full rounded-3xl p-5 flex items-center justify-between transition-all active:scale-95 bg-white shadow-md border border-slate-100 hover:shadow-lg"
-                    >
-                        <div className="flex items-center gap-5">
-                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl ${game.color}`}>
-                                {game.icon}
+                {games.map((game) => {
+                    const GameIcon = game.icon;
+                    return (
+                        <button
+                            key={game.id}
+                            onClick={() => onSelectGame(game.id)}
+                            className="hit-target w-full rounded-3xl p-5 flex items-start justify-start gap-5 transition-all active:scale-95 bg-white shadow-md border border-slate-100 hover:shadow-lg"
+                        >
+                            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${game.color} shrink-0`}>
+                                <GameIcon className="w-8 h-8" strokeWidth={3} />
                             </div>
-                            <div className="text-left">
-                                <h4 className="text-xl font-black text-slate-900">{game.name}</h4>
-                                <p className="text-sm text-slate-700 font-bold">{game.description}</p>
+                            <div className="text-left pt-1">
+                                <h4 className="text-xl font-black text-slate-900 leading-none mb-1">{game.name}</h4>
+                                <p className="text-sm text-slate-700 font-bold leading-tight">{game.description}</p>
                             </div>
-                        </div>
-                        <ChevronRight className="w-6 h-6 text-slate-300" />
-                    </button>
-                ))}
+                        </button>
+                    );
+                })}
             </div>
         </div>
     );

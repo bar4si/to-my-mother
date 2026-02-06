@@ -10,14 +10,18 @@ A nostalgic and accessible game suite designed with love for my mother (born in 
 - **Dynamic Word Search**:
   - Over **50,000 unique word combinations** generated from a vast pool.
   - Three difficulty levels: **Beginner**, **Intermediate**, and **Expert**.
-  - **Expert Mode**: Includes diagonal words for an extra challenge.
+- **Themed Memory Game**:
+  - **Random Nostalgic Themes**: Grandma's Garden, Coffee Time, Sky Watching, and Leisure Time.
+  - **Dynamic Complexity**: Cards count and flip speed adjust based on difficulty.
 - **Global Scoring System**: Earn points for every victory (1, 5, or 10 points based on difficulty).
 - **Senior-Friendly UX**:
   - High contrast (7:1 ratio) for better visibility.
-  - Large hit targets (60px) for easy interaction.
-  - Straight-line selection lock to help with motor precision.
+  - Large hit targets (60px) and maximized icons for easy interaction.
+  - PWA Support: Optimized for offline play with high-definition premium icons.
+
 ## 🕹️ Games Included
 - **🔍 Word Search**: Over 50,000 unique combinations across three difficulty levels.
+- **🧠 Memory Game**: Match nostalgic icons in a senior-optimized grid.
 
 ## 🛠️ Tech Stack
 

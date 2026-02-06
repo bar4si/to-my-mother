@@ -10,17 +10,18 @@ Uma suíte de jogos nostálgicos e acessíveis, criada com todo o carinho para m
 - **Caça-Palavras Dinâmico**:
   - Mais de **50.000 combinações únicas** geradas a partir de um grande banco de palavras.
   - Três níveis de dificuldade: **Iniciante**, **Intermediário** e **Especialista**.
-  - **Modo Especialista**: Inclui palavras na diagonal para um desafio extra.
+- **Jogo da Memória Temático**:
+  - **Temas Nostálgicos Aleatórios**: Jardim da Vovó, Hora do Café, Olhando o Céu e Tempo de Lazer.
+  - **Complexidade Dinâmica**: Quantidade de cartas e velocidade de virada ajustadas conforme a dificuldade.
 - **Sistema de Pontuação Global**: Ganhe pontos em cada vitória (1, 5 ou 10 pontos dependendo da dificuldade).
 - **UX para Idosos (Senior-Friendly)**:
   - Alto contraste (proporção 7:1) para melhor visibilidade.
-  - Áreas de toque grandes (60px) para facilitar a interação.
-  - Trava de seleção em linha reta para ajudar na precisão motora.
-- **Suporte PWA**: Funciona 100% offline após instalado. Perfeito para jogar no tablet ou celular sem depender de internet.
-- **Salvamento Automático**: Suas pontuações e nível preferido são salvos automaticamente.
+  - Áreas de toque grandes (60px) e ícones maximizados para facilitar a interação.
+  - Suporte PWA: Otimizado para jogar offline com ícones premium de alta definição.
 
 ## 🕹️ Jogos Disponíveis
 - **🔍 Caça-Palavras**: Mais de 50.000 combinações únicas em três níveis.
+- **🧠 Jogo da Memória**: Combine ícones nostálgicos em um grid otimizado para idosos.
 
 ## 🛠️ Tecnologias
 
