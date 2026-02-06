@@ -10,12 +10,11 @@ O projeto "to-my-mother" já está preparado para publicação automática.
 - [x] **Contraste Aprimorado**: Cores do tema ajustadas para máxima legibilidade (fundo branco puro e textos em tons de slate escuro).
 - [x] **Acessibilidade Visível**: Aumentado o peso das fontes e a clareza dos botões no menu principal e no jogo de caça-palavras.
 - [x] **Caça-Palavras Gigante**: Grid travado em 8x8 com letras em tamanho `text-3xl`. O tabuleiro agora expande até as bordas da tela no celular, aproveitando 100% do espaço disponível.
-- [x] **Dificuldade Real na Memória**:
-    - **Tamanho Padronizado**: Independente do nível, as cartas agora mantêm o mesmo tamanho (grid fixo de 4 colunas) para consistência visual.
-    - **Ícones Gigantes**: As figuras agora aproveitam todo o espaço da carta (`w-14 h-14`), maximizando a visibilidade.
-    - **Fácil**: 8 cartas (4 pares) e tempo extra para memorizar (2s).
-    - **Médio**: 12 cartas (6 pares) e tempo equilibrado (1.2s).
-    - **Difícil**: 16 cartas (8 pares) e tempo curto (0.8s), exigindo mais foco.
+- [x] **Dificuldade Visual**: Menu de seleção de nível agora utiliza ícones lúdicos e coloridos (Brotinho, Café, Cérebro) em formato de cards grandes, tornando a escolha mais tátil e intuitiva.
+- [x] **Menu Refinado**:
+    - **Ícones Vetoriais**: Substituição de emojis por ícones Lucide (`Search`, `Grid2X2`) para alinhamento milimétrico.
+    - **Tamanho Fixo**: Botões de jogo com altura padronizada (`h-32`) para evitar pulos de layout e facilitar o toque.
+    - **Alinhamento Premium**: Conteúdo dos cards alinhado à esquerda para leitura fluída, com centralização vertical para um acabamento profissional.
 - [x] **PWA e Metadados**: Pasta `public` criada, manifesto configurado e ícone SVG adicionado para suporte completo a PWA.
 - [x] **Remoção de Placeholders**: Removido o jogo da memória ("Em breve") do menu e da documentação para focar na experiência atual.
 

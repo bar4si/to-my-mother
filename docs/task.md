@@ -42,6 +42,10 @@
     - [x] Expand todo.md with senior psychologist perspective
     - [x] Create therapeutic ranking of activities
     - [x] Tailor activities for senior living alone
-- [x] Finalize Documentation
-    - [x] Synchronize README.md and README_pt.md
-    - [x] Update walkthrough and todo artifacts
+- [x] Implement Visual Difficulty Selection
+    - [x] Create implementation plan
+    - [x] Update GameMenu.tsx with SVG icons (Sprout, Coffee, Brain)
+    - [x] Standardize game cards with Lucide icons (Search, Grid)
+    - [x] Fix uniform button size (h-32) and vertical alignment
+    - [x] Remove redundant level indicators
+    - [x] Run build and verify

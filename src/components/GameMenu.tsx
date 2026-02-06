@@ -89,7 +89,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ progress, onSelectGame, onSetDiffic
                             <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${game.color} shrink-0`}>
                                 <GameIcon className="w-8 h-8" strokeWidth={3} />
                             </div>
-                            <div className="text-left pt-1">
+                            <div className="text-left pt-1 w-80">
                                 <h4 className="text-xl font-black text-slate-900 leading-none mb-1">{game.name}</h4>
                                 <p className="text-sm text-slate-700 font-bold leading-tight">{game.description}</p>
                             </div>
