@@ -25,11 +25,21 @@ A nostalgic and accessible game suite designed with love for my mother (born in 
 
 ## 🛠️ Tech Stack
 
-- **Framework**: React + Vite + TypeScript
-- **Styling**: Tailwind CSS
+- **Framework**: React 18 + Vite + TypeScript
+- **Styling**: Tailwind CSS + PostCSS + Autoprefixer
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
+- **Celebrations**: Canvas-confetti
+- **PWA**: Vite PWA Plugin
 - **Persistence**: LocalStorage
+- **Utilities**: clsx, tailwind-merge, class-variance-authority
+
+### Main Dependencies
+- `framer-motion`: Smooth UI transitions and animations.
+- `lucide-react`: High-quality, consistent icons.
+- `canvas-confetti`: Celebratory effects for level-ups.
+- `vite-plugin-pwa`: Zero-config PWA support.
+- `tailwind-merge`: Robust Tailwind class management.
 
 ## 🚀 Getting Started
 

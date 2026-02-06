@@ -25,11 +25,21 @@ Uma suíte de jogos nostálgicos e acessíveis, criada com todo o carinho para m
 
 ## 🛠️ Tecnologias
 
-- **Framework**: React + Vite + TypeScript
-- **Estilização**: Tailwind CSS
+- **Framework**: React 18 + Vite + TypeScript
+- **Estilização**: Tailwind CSS + PostCSS + Autoprefixer
 - **Animações**: Framer Motion
 - **Ícones**: Lucide React
+- **Celebrações**: Canvas-confetti
+- **PWA**: Vite PWA Plugin
 - **Persistência**: LocalStorage
+- **Utilitários**: clsx, tailwind-merge, class-variance-authority
+
+### Principais Bibliotecas
+- `framer-motion`: Transições e animações fluidas de interface.
+- `lucide-react`: Ícones consistentes e de alta qualidade.
+- `canvas-confetti`: Efeitos de celebração ao subir de nível.
+- `vite-plugin-pwa`: Suporte PWA com configuração simplificada.
+- `tailwind-merge`: Gerenciamento robusto de classes Tailwind.
 
 ## 🚀 Como Começar
 
